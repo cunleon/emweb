@@ -16,23 +16,22 @@
 
 ### Description
 
-The function `mg_check_feature()` can be called from an application program to check of specific features have been compiled in the civetweb version which the application has been linked to. The feature to check is provided as an unsigned integer parameter. If the function is available in the currently linked library version, a value **> 0** is returned. Otherwise the function `mg_check_feature()` returns the value **0**.
+可以从应用程序调用函数 'mg_check_feature（）' 来检查应用程序链接到的 civetweb 版本中是否已编译特定功能。要检查的特征以无符号整数参数的形式提供。如果该函数在当前链接的库版本中可用，则返回值 **> 0**。否则，函数 'mg_check_feature（）' 返回值 **0**。
 
-The following parameter values can be used:
+可以使用以下参数值：
 
-| Value | Compilation option | Description |
-| :---: | :---: | :--- |
-| **1** | NO_FILES | *Able to serve files*.  If this feature is available, the webserver is able to serve files directly from a directory tree. |
-| **2** | NO_SSL | *Support for HTTPS*. If this feature is available, the webserver van use encryption in the client-server connection. SSLv2, SSLv3, TLSv1.0, TLSv1.1 and TLSv1.2 are supported depending on the SSL library CivetWeb has been compiled with, but which protocols are used effectively when the server is running is dependent on the options used when the server is started. |
-| **4** | NO_CGI | *Support for CGI*. If this feature is available, external CGI scripts can be called by the webserver. |
-| **8** | USE_IPV6 | *Support IPv6*. The CivetWeb library is capable of communicating over both IPv4 and IPv6, but IPv6 support is only available if it has been enabled at compile time. |
-| **16** | USE_WEBSOCKET | Support for web sockets. WebSockets support is available in the CivetWeb library if the proper options has been used during cimpile time. |
-| **32** | USE_LUA | *Support for Lua scripts and Lua server pages*. CivetWeb supports server side scripting through the Lua language, if that has been enabled at compile time. Lua is an efficient scripting language which is less resource heavy than for example PHP. |
-| **64** | USE_DUKTAPE | *Support for server side JavaScript*. Server side JavaScript can be used for dynamic page generation if the proper options have been set at compile time. Please note that client side JavaScript execution is always available if it has been enabled in the connecting browser. |
-| **128** | NO_CACHING | *Support for caching*. The webserver will support caching, if it has not been disabled while compiling the library. |
+|价值 |编译选项 |描述 |
+|:---: |:---: |:--- |
+|**1** |NO_FILES |*能够提供文件*。如果此功能可用，则 Web 服务器能够直接从目录树提供文件。|
+|**2** |NO_SSL |*支持 HTTPS*。如果此功能可用，则 Web 服务器货车将在客户端-服务器连接中使用加密。支持 SSLv2、SSLv3、TLSv1.0、TLSv1.1 和 TLSv1.2 取决于 CivetWeb 编译时使用的 SSL 库，但是在服务器运行时有效使用哪些协议取决于服务器启动时使用的选项。|
+|**4** |NO_CGI |*支持 CGI*。如果此功能可用，则 Web 服务器可以调用外部 CGI 脚本。|
+|**8** |USE_IPV6 |*支持 IPv6*。CivetWeb 库能够通过 IPv4 和 IPv6 进行通信，但 IPv6 支持仅在编译时启用后才可用。|
+|**16** |USE_WEBSOCKET |支持 Web 套接字。如果在 cimpile 期间使用了正确的选项，则 CivetWeb 库中提供了 WebSockets 支持。|
+|**32** |USE_LUA |*支持 Lua 脚本和 Lua 服务器页面*。CivetWeb 通过 Lua 语言支持服务器端脚本，如果在编译时启用了该语言。Lua 是一种高效的脚本语言，它比 PHP 占用的资源更少。|
+|**64** |USE_DUKTAPE |*支持服务器端 JavaScript*。如果在编译时设置了适当的选项，则可以使用服务器端 JavaScript 生成动态页面。请注意，如果在连接浏览器中启用了客户端 JavaScript 执行，则它始终可用。|
+|**128** |NO_CACHING |*支持缓存*。如果在编译库时未禁用缓存，则 Web 服务器将支持缓存。|
 
-Parameter values other than the values mentioned above will give undefined results. Therefore&mdash;although the parameter values for the `mg_check_feature()` function are effectively bitmasks, you shouldn't assume that combining two of those values with an OR to a new value will give any meaningful results when the function returns.
-
+除上述值以外的参数值将产生未定义的结果。因此，尽管 'mg_check_feature（）' 函数的参数值实际上是位掩码，但您不应假设在函数返回时，将其中两个值与 OR 组合为新值会得到任何有意义的结果。
 ### See Also
 
 * [`mg_get_option();`](mg_get_option.md)

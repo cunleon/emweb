@@ -18,16 +18,12 @@
 
 ### Description
 
-This function can be used to check if a request header contains HTTP digest authentication
-information, matching user and password encoded within the password file.
-If the authentication realm (also called authentication domain) is NULL, the parameter
-`authentication_domain` as specified in the server configuration (`mg_start()`) is used.
+此函数可用于检查请求标头是否包含 HTTP 摘要身份验证信息，匹配密码文件中编码的用户和密码。
+如果身份验证域（也称为身份验证域）为 NULL，则参数使用服务器配置 （'mg_start（）'） 中指定的 'authentication_domain' 。
 
-A positive return value means, the user name, realm and a correct password hash have been
-found in the passwords file.
-A return of 0 means, reading the password file succeeded, but there was no matching user,
-realm and password.
-The function returns a negative number on errors.
+正返回值表示用户名、领域和正确的密码哈希值在 passwords 文件中找到。
+返回 0 表示读取密码文件成功，但没有匹配的用户realm 和 password 的 STATE 文件。
+该函数在出错时返回负数。
 
 ### See Also
 

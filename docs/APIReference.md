@@ -1,18 +1,9 @@
-# CivetWeb API Reference
+# EmWeb API Reference
+EmWeb 克隆自 CivetWeb，目的是裁剪掉对自己没有用的功能，增加自己需要的特性
 
-CivetWeb is often used as HTTP and HTTPS library inside a larger application.
-A C API is available to integrate the CivetWeb functionality in a larger
-codebase.
-This document describes the public C API. Basic usage examples of
-the API can be found in [Embedding.md](Embedding.md), as well as in the
-examples directory.
-
-A C++ wrapper for some basic features is also available.
-Note that only a small subset of the functionality available through the
-C API can be accessed using this C++ wrapper. The C++ wrapper is not unit
-tested, and there is no C++ API documentation equivalent to this C API
-documentation.
-
+CivetWeb通常被用作大型应用程序内部的HTTP和HTTPS库。
+通过C API可以将CivetWeb的功能集成到更大的代码库中。
+本文档描述了公共C API。
 
 ## Macros
 
@@ -26,14 +17,20 @@ documentation.
 ## Handles
 
 * `struct mg_context *`
-Handle for one instance of the HTTP(S) server.
-All functions using `const struct mg_context *` as an argument do not modify a running server instance, but just query information. Functions using a non-const `struct mg_context *` as an argument may modify a server instance (e.g., register a new URI, stop the server, ...).
+表示一个 HTTP(S) 服务器实例的句柄。
+所有以 const struct mg_context * 作为参数的函数 不会修改 正在运行的服务器实例，仅用于查询信息。
+以非 const 的 struct mg_context * 作为参数的函数 可能修改 服务器实例（例如注册新 URI、停止服务器等操作）。
 
 * `struct mg_connection *`
-Handle for one individual client-server connection.
-Functions working with `const struct mg_connection *` operate on data already known to the server without reading data from or sending data to the client. Callbacks using a `const struct mg_connection *` argument are supposed to not call functions from the `mg_read()` and `mg_write()` family. To support a correct application, reading and writing functions require a non-const `struct mg_connection *` connection handle.
+表示 单个客户端-服务器连接 的句柄。
+使用 const struct mg_connection * 参数的函数：
+▶ 仅操作服务器已缓存的数据，不会 从客户端读取或向客户端发送数据。
+▶ 在回调函数中，若参数为 const struct mg_connection *，禁止调用 mg_read() 或 mg_write() 系列函数。
+使用 非 const 的 struct mg_connection * 参数的函数：
+▶ 需用于 读写操作（如接收请求体、发送响应等），以确保应用程序逻辑的正确性。
 
-The content of both structures is not defined in the interface - they are only used as opaque pointers (handles).
+补充说明
+mg_context 和 mg_connection 结构体的具体内容未在接口中定义，开发者仅需将其视为 不透明指针（opaque pointers） 使用。
 
 ## Structures
 

@@ -6,14 +6,15 @@
 
 | Field | Type | Description |
 | :--- | :--- | :--- |
-|**`subject`**|`const char *`| The subject of the certificate |
-|**`issuer`**|`const char *`| The issuer of the certificate |
-|**`serial`**|`const char *`| The serial number of the certificate |
-|**`finger`**|`const char *`| The fingerprint of the certificate |
+|**`subject`**|`const char *`| 证书的使用者 |
+|**`issuer`**|`const char *`| 证书的颁发者 |
+|**`serial`**|`const char *`| 证书的序列号 |
+|**`finger`**|`const char *`| 证书的指纹 |
+
 
 ### Description
 
-The structure `client_cert` is used as a sub-structure in the [`mg_request_info`](mg_request_info.md) structure to store information of an optional client supplied certificate.
+结构 'client_cert' 用作 ['mg_request_info']（mg_request_info.md） 结构中的子结构，以存储可选客户端提供的证书的信息。
 
 ### See Also
 
