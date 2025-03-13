@@ -1,22 +1,22 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_stop( ctx );`
+### `mg_stop(ctx);`
 
-#### Parameters
+#### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`ctx`**|**`struct mg_context *`**| A pointer to the current webserver context |
+| **`ctx`** | **`struct mg_context *`** | 指向当前运行的 Web 服务器上下文的指针 |
 
-### Return Value
+### 返回值
 
-*none*
+无
 
-### Description
+### 描述
 
-The function `mg_stop()` is used to stop and cleanup a running webserver. A pointer to the context of the running webserver is provided as a parameter. The execution of this function may take some time because it waits until all threads have stopped and returns all memory to the heap. After the function returns, the location the context pointer points to is invalid. The function does not return a return value and it is therefore not possible to know if stopping the webserver succeeded or not.
+`mg_stop()` 函数用于停止并清理正在运行的 Web 服务器。该函数的参数是一个指向运行中的 Web 服务器上下文的指针。执行此函数可能需要一些时间，因为它会等待所有线程停止，并将所有内存归还给堆。函数返回后，上下文指针所指向的位置将不再有效。该函数不返回任何值，因此无法得知 Web 服务器是否成功停止。
 
-### See Also
+### 参见
 
-* [`mg_start();`](mg_start.md)
-* [`mg_start_thread();`](mg_start_thread.md)
+* [mg_start();](mg_start.md)
+* [mg_start_thread();](mg_start_thread.md)

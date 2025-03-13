@@ -1,22 +1,22 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
 ### `mg_unlock_connection( conn );`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`struct mg_connection *`|Connection to remove the lock from|
+|**`conn`**|`struct mg_connection *`|需要解锁的连接|
 
-### Return Value
+### 返回值
 
-*none*
+*无*
 
-### Description
+### 描述
 
-The function `mg_unlock_connection()` removes the lock on a connection which was previously set with a call to [`mg_lock_connection()`](mg_lock_connection.md). Locking may be necessary when using [`mg_write()`](mg_write.md) or [`mg_printf()`](mg_printf.md) on websocket connections to prevent data corruption.
+函数 `mg_unlock_connection()` 用于移除通过 [`mg_lock_connection()`](mg_lock_connection.md) 设置的连接锁。在使用 [`mg_write()`](mg_write.md) 或 [`mg_printf()`](mg_printf.md) 对 WebSocket 连接进行写操作时，锁定可能是必要的，以防止数据损坏。
 
-### See Also
+### 相关函数
 
 * [`mg_lock_connection();`](mg_lock_connection.md)
 * [`mg_lock_context();`](mg_lock_context.md)

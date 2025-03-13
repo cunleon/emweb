@@ -1,31 +1,31 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### ~~`mg_get_ports( ctx, size, ports, ssl );`~~
+### ~~`mg_get_ports(ctx, size, ports, ssl);`~~
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`ctx`**|`const struct mg_context *`||
-|**`size`**|`size_t`|The number of ports which can be stored in the buffer|
-|**`ports`**|`int *`|Buffer for storage of the port numbers|
-|**`ssl`**|`int *`|Buffer used to store if SSL is used for the ports|
+| **`ctx`** | `const struct mg_context *` | 指向 CivetWeb 服务器上下文的指针 |
+| **`size`** | `size_t` | 缓冲区可以存储的端口号数量 |
+| **`ports`** | `int *` | 用于存储端口号的缓冲区 |
+| **`ssl`** | `int *` | 用于存储每个端口是否使用 SSL 的缓冲区 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`size_t`|The number of ports stored in the buffer|
+| `size_t` | 实际存储在缓冲区中的端口数量 |
 
-### Description
+### 说明
 
-This function is deprecated. Use [`mg_get_server_ports()`](mg_get_server_ports.md) instead.
+此函数已被弃用，请改用 [`mg_get_server_ports()`](mg_get_server_ports.md)。
 
-The function `mg_get_ports()` returns a list of ports the Civetweb server is listening on. The port numbers are stored in a buffer of integers which is supplied by the calling party. The function also stores information if SSL is used on the ports. This information is stored in a second buffer which should be capable of storing the same amount of items as the ports buffer.
+`mg_get_ports()` 函数返回 CivetWeb 服务器正在监听的端口列表。端口号存储在调用方提供的整数数组缓冲区中。此外，函数还会在第二个缓冲区中存储每个端口是否使用 SSL 的信息，该缓冲区应能够存储与端口缓冲区相同数量的元素。
 
-The function returns the number of ports actually stored in the buffer.
+函数返回实际存储在缓冲区中的端口数量。
 
-### See Also
+### 参考
 
 * [`struct mg_server_port;`](mg_server_port.md)
 * [`mg_get_server_ports();`](mg_get_server_ports.md)

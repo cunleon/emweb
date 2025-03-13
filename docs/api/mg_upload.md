@@ -1,22 +1,23 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
 ### ~~`mg_upload( conn, destination_dir );`~~
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`struct mg_connection *`|Connection on which files to upload|
-|**`destination_dir`**|`const char *`|The destination directory to upload to|
+|**`conn`**|`struct mg_connection *`|用于上传文件的连接|
+|**`destination_dir`**|`const char *`|上传文件的目标目录|
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|Success or error code|
+|`int`|成功或错误代码|
 
-### Description
+### 描述
 
-The function `mg_upload()` is deprecated and may be removed from future releases. Use of this function is therefore highly discouraged.
+函数 `mg_upload()` 已弃用，并可能在未来的版本中移除。因此，**强烈不建议**使用此函数。
 
-### See Also
+### 相关函数
+

@@ -14,15 +14,13 @@ none
 
 ### Description
 
-The function `mg_exit_library()` should be called from an application program, when the library should be unloaded.
-It can be called multiple times (`mg_init_library` and `mg_exit_library` are reference counting).
-However, the caller must make sure it is not called in parallel (it is not guaranteed to be thread safe).
-
-Only use `mg_exit_library( );` when you used [`mg_init_library( feature );`](api/mg_init_library.md) before.
-
-The library init and exit functions are new in version 1.9 (as dummy implementation) and effective only from version 1.10.
-For compatibility reasons, other functions (such as [`mg_start();`](mg_start.md)) will initialize the required features as well,
-but they will no longer do a de-initialization, leaving a memory leak when the library is unloaded.
+当需要卸载库时，应用程序应调用 mg_exit_library() 函数。
+它可以多次调用（mg_init_library 和 mg_exit_library 是引用计数的）。
+然而，调用者必须确保它不会被并行调用（不能保证它是线程安全的）。
+只有在之前使用了 mg_init_library(feature); 时，才应使用 mg_exit_library();。
+库的初始化和退出函数是从 1.9 版本开始引入的（作为虚拟实现），并且从 1.10 版本开始才真正生效。
+为了兼容性，其他函数（例如 mg_start();）也会初始化所需的特性，
+但它们不会再进行反初始化，这会在库卸载时导致内存泄漏。
 
 ### See Also
 

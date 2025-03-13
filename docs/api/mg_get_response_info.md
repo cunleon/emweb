@@ -1,29 +1,28 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_response_info( conn );`
+### `mg_get_response_info(conn);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`const struct mg_connection *`|The connection for which the response info is needed|
+| **`conn`** | `const struct mg_connection *` | 需要获取响应信息的连接 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`const struct mg_response_info *`|Pointer to the response info, or NULL if an error occurred|
+| `const struct mg_response_info *` | 指向响应信息的指针，如果发生错误则返回 NULL |
 
-### Description
+### 说明
 
-The function `mg_response_info()` returns information about a response on a client connection opened by `mg_connect_client()`. If an error occurs, a NULL pointer is returned instead.
+`mg_get_response_info()` 函数返回由 `mg_connect_client()` 打开的客户端连接上的响应信息。如果发生错误，则返回 NULL 指针。
 
-Use this function when implementing a client.
+在实现客户端时应使用此函数。
 
-### See Also
+### 参考
 
 * [`struct mg_response_info;`](mg_response_info.md)
 * [`mg_connect_client();`](mg_connect_client.md)
 * [`mg_get_request_info();`](mg_get_request_info.md)
 * [`struct mg_request_info;`](mg_request_info.md)
-

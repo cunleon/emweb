@@ -1,22 +1,22 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_lock_context( ctx );`
+### `mg_lock_context(ctx);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`ctx`**|`struct mg_context *`|The context to put the lock on|
+| **`ctx`** | `struct mg_context *` | 需要加锁的上下文 |
 
-### Return Value
+### 返回值
 
-*none*
+*无*
 
-### Description
+### 说明
 
-The function `mg_lock_context()` can be used to acquire a lock for exclusive access to resources which are shared between connection of threads. The lock is context wide. The lock must be released with a call to [`mg_unlock_context()`](mg_unlock_context.md).
+`mg_lock_context()` 函数用于获取一个锁，以独占访问在多个线程连接之间共享的资源。该锁是上下文范围内的。必须通过调用 [`mg_unlock_context()`](mg_unlock_context.md) 释放锁。
 
-### See Also
+### 参考
 
 * [`mg_lock_connection();`](mg_lock_connection.md)
 * [`mg_unlock_connection();`](mg_unlock_connection.md)

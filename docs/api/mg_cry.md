@@ -16,7 +16,7 @@
 
 ### Description
 
-The function `mg_cry()` is called when something happens on a connection. The function takes a format string similar to the `printf()` series of functions with parameters and creates a text string which can then be used for logging. The `mg_cry()` function prints the output to the opened error log stream. Log messages can be processed with the `log_message()` callback function specified in the `struct mg_callbacks` structure.
+mg_cry() 函数在连接上发生某些事件时被调用。该函数接受一个类似于 printf() 系列函数的格式字符串及其参数，并生成一个文本字符串，该字符串随后可用于日志记录。mg_cry() 函数将输出打印到已打开的错误日志流中。日志消息可以通过 struct mg_callbacks 结构体中指定的 log_message() 回调函数进行处理。
 
 ### See Also
 

@@ -1,31 +1,34 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_var2( data, data_len, var_name, dst, dst_len, occurrence );`
+### `mg_get_var2(data, data_len, var_name, dst, dst_len, occurrence);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`data`**|`const char *`|Encoded data buffer from either POST data or a GET URI|
-|**`data_len`**|`size_t`|The size of the encoded data buffer|
-|**`var_name`**|`const char *`|The name of the variable to search for|
-|**`dst`**|`char *`|Destination buffer to store the variable content|
-|**`dst_len`**|`size_t`|The size of the destination buffer including the terminating NUL|
-|**`occurrence`**|`size_t`|The instance index of the wanted variable|
+| **`data`** | `const char *` | 来自 POST 数据或 GET 请求 URI 的编码数据缓冲区 |
+| **`data_len`** | `size_t` | 编码数据缓冲区的大小 |
+| **`var_name`** | `const char *` | 要查找的变量名称 |
+| **`dst`** | `char *` | 用于存储变量内容的目标缓冲区 |
+| **`dst_len`** | `size_t` | 目标缓冲区的大小，包括终止符 NUL |
+| **`occurrence`** | `size_t` | 要获取的变量实例索引 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|Length of the variable contents, or an error code|
+| `int` | 变量内容的长度，或错误代码 |
 
-### Description
+### 说明
 
-The function `mg_get_var2()` can be used to return the contents of a variable passed to the server as either POST data, or in the URI in a GET call. The function is somilar to [`mg_get_var()`](mg_get_var.md) but the difference is that `mg_get_var2()` can be used if the same variable is present multiple times in the data. The `occurrence` parameter is used to identify which instance of the variable must be returned where **`0`** is used for the first variable with the specified name, **`1`** for the second and so on.
+`mg_get_var2()` 函数用于从通过 POST 数据或 GET 请求 URI 传递给服务器的变量中获取内容。该函数与 [`mg_get_var()`](mg_get_var.md) 类似，但不同之处在于，`mg_get_var2()` 可以处理数据中多次出现的相同变量。`occurrence` 参数用于指定要返回的变量实例，其中 **`0`** 表示第一个指定名称的变量，**`1`** 表示第二个，依此类推。
 
-The function returns the length of the variable content in the return buffer, **`-1`** if a variable with the specified name could not be found and **`-2`** if the pointer to the result buffer is NULL, the size of the result buffer is zero or when the result buffer is too small to contain the variable content and terminating NUL.
+函数返回值如下：
+- 成功时返回目标缓冲区中变量内容的长度。
+- 如果未找到指定名称的变量，返回 **`-1`**。
+- 如果目标缓冲区指针为 NULL、缓冲区大小为零，或缓冲区不足以存储变量内容和终止符 NUL，则返回 **`-2`**。
 
-### See Also
+### 参考
 
 * [`mg_get_cookie();`](mg_get_cookie.md)
 * [`mg_get_var();`](mg_get_var.md)

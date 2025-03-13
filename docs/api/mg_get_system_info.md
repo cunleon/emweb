@@ -1,30 +1,24 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_system_info( buffer, buflen );`
+### `mg_get_system_info(buffer, buflen);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`buffer**|`char *`|A string buffer to store the information|
-|**`buflen**|`int`|Size of the string buffer (including space for a terminating 0)|
+| **`buffer`** | `char *` | 用于存储信息的字符串缓冲区 |
+| **`buflen`** | `int` | 字符串缓冲区的大小（包括终止符 0 的空间） |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|Available system information in bytes (excluding the terminating 0)|
+| `int` | 可用系统信息的字节数（不包括终止符 0） |
 
-### Description
+### 说明
 
-The function `mg_get_system_info()` returns information collected for the system 
-(operating system, compiler, version, ...). 
-Currently this data is returned as string is in JSON format, but changes to the 
-format are possible in future versions.  The exact content of the JSON object may vary, 
-depending on the operating system and server version.
-This string should be included for support requests.
+`mg_get_system_info()` 函数返回系统相关信息（操作系统、编译器、版本等）。目前，这些数据以 JSON 格式的字符串返回，但未来版本可能会更改格式。JSON 对象的具体内容可能会因操作系统和服务器版本而有所不同。建议在提交支持请求时包含此字符串。
 
-### See Also
+### 参考
 
 * [`mg_get_context_info();`](mg_get_context_info.md)
-

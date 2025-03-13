@@ -25,9 +25,8 @@
 
 ### Description
 
-The function `mg_connect_websocket_client()` connects to a websocket on a server as a client. Data and close events are processed with callback functions which must be provided in the call.
-
-Civetweb supports both IPv4 and IPv6 communication, but only if the use if IPv6 has been enabled at compile time. When running an application it is possible to check if IPv6 addressing is available by calling the [`mg_check_feature()`](mg_check_feature.md) function with the `USE_IPV6` parameter.
+mg_connect_websocket_client() 函数作为客户端连接到服务器上的一个 WebSocket。数据和关闭事件通过回调函数进行处理，这些回调函数必须在调用时提供。
+Civetweb 支持 IPv4 和 IPv6 通信，但前提是 IPv6 必须在编译时启用。当运行应用程序时，可以通过调用 mg_check_feature() 函数并传入 USE_IPV6 参数来检查是否支持 IPv6 地址。
 
 ### See Also
 

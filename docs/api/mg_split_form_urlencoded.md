@@ -1,36 +1,37 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_split_form_urlencoded( data, form_fields, num_form_fields );`
+### `mg_split_form_urlencoded(data, form_fields, num_form_fields);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`data`**|`char *`|Form encoded data to be split. This buffer will be modified by `mg_split_form_urlencoded`.|
-|**`form_fields`**|`struct mg_header []`|Output buffer for name-value-pairs.|
-|**`num_form_fields`**|`unsigned`|Number of elements in form_fields buffer.|
+| **`data`** | `char *` | 要拆分的表单编码数据。此缓冲区将被 `mg_split_form_urlencoded` 修改。 |
+| **`form_fields`** | `struct mg_header []` | 用于存储键值对的输出缓冲区。 |
+| **`num_form_fields`** | `unsigned` | `form_fields` 缓冲区中的元素数量。 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|Number of encoded form fields, or an error code|
+| `int` | 成功时返回编码表单字段的数量，失败时返回错误代码。 |
 
-### Description
+### 描述
 
-The function `mg_split_form_urlencoded()` can be used to split an x-www-form-urlencoded data field into name-value-pairs. It can split the POST body data of an x-www-form-urlencoded html form, or a query string. The parameter `data` is modified by this function, so the `query_string` member of `struct mg_request_info` must not be passed directly to this function, since `query_string` is a `const char *`. Use a copy (e.g, created by `strdup`) as input for `mg_split_form_urlencoded()`. 
-The caller has to provide all required buffers, since the function does not do any memory handling itself. Percent-encoded elements will be decoded.
+`mg_split_form_urlencoded()` 函数可用于将 `x-www-form-urlencoded` 数据字段拆分为键值对。它可以拆分 `x-www-form-urlencoded` HTML 表单的 POST 数据体，或查询字符串。`data` 参数会被此函数修改，因此不能直接将 `struct mg_request_info` 的 `query_string` 成员传递给此函数，因为 `query_string` 是 `const char *` 类型。可以使用副本（例如通过 `strdup` 创建）作为 `mg_split_form_urlencoded()` 的输入。
 
-Example for an x-www-form-urlencoded format encoded input:
+调用者需要提供所有必要的缓冲区，因为该函数本身不进行任何内存管理。百分号编码的元素将被解码。
+
+例如，输入的 `x-www-form-urlencoded` 格式为：
 `data = "keyName1=value1&keyName2=value2&keyName3=value3"`
-The function will return 3 and set `form_fields[0].name = "keyName1"`, `form_fields[0].value = "value1"`, `form_fields[1].name = "keyName2"`, `form_fields[1].value = "value2"`, `form_fields[2].name = "keyName3"`, `form_fields[2].value = "value3"`, and modify `data` to `"keyName1\x00value1\x00keyName2\x00value2\x00keyName3\x00value3"`.
 
+函数将返回 `3`，并将 `form_fields[0].name` 设置为 `"keyName1"`，`form_fields[0].value` 设置为 `"value1"`，`form_fields[1].name` 设置为 `"keyName2"`，`form_fields[1].value` 设置为 `"value2"`，`form_fields[2].name` 设置为 `"keyName3"`，`form_fields[2].value` 设置为 `"value3"`，同时将 `data` 修改为 `"keyName1\x00value1\x00keyName2\x00value2\x00keyName3\x00value3"`。
 
-### See Also
+### 参见
 
-* [`struct mg_header`](mg_header.md)
-* [`struct mg_request_info`](mg_request_info.md)
-* [`mg_get_cookie();`](mg_get_cookie.md)
-* [`mg_get_var();`](mg_get_var.md)
-* [`mg_get_var2();`](mg_get_var2.md)
-* [`mg_handle_form_request();`](mg_handle_form_request.md)
+* [struct mg_header](mg_header.md)
+* [struct mg_request_info](mg_request_info.md)
+* [mg_get_cookie()](mg_get_cookie.md)
+* [mg_get_var()](mg_get_var.md)
+* [mg_get_var2()](mg_get_var2.md)
+* [mg_handle_form_request()](mg_handle_form_request.md)

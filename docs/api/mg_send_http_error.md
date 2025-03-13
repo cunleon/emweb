@@ -1,32 +1,33 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_send_http_error( conn, status_code, fmt, ... );`
+### `mg_send_http_error(conn, status_code, fmt, ...);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`struct mg_connection *`|The connection over which the data must be sent|
-|**`status_code`**|`int`|The HTTP status code (see HTTP standard)|
-|**`fmt`**|`const char *`|Format string for an error message|
-|**`...`**|*various*|Parameters as specified in the format string|
+| **`conn`** | `struct mg_connection *` | 用于发送数据的连接 |
+| **`status_code`** | `int` | HTTP 状态码（参见 HTTP 标准） |
+| **`fmt`** | `const char *` | 错误消息的格式化字符串 |
+| **`...`** | *可变参数* | 根据格式化字符串指定的参数 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
-|`int`| An integer indicating success (>=0) or failure (<0) |
+| 类型 | 描述 |
+| :--- | :--- |
+| `int` | 表示成功（>=0）或失败（<0）的整数 |
 
+### 说明
 
-### Description
+`mg_send_http_error()` 函数用于从服务器向客户端发送 HTTP 错误消息。`status_code` 必须是预定义的 HTTP 标准错误码之一（例如，“404” 表示 “Not Found”）。该函数已知标准错误码的状态文本（例如，“Not Found”）。可以使用 `fmt` 格式化字符串和附加参数指定错误消息的正文，以更详细地说明错误。`fmt` 格式化字符串的工作方式与标准 C 库中的 `printf()` 函数类似。
 
-The function `mg_send_http_error()` can be used to send HTTP error messages from a server to a client.
-The `status_code` must be one of the predefined HTTP standard error codes (e.g., "404" for "Not Found").
-The status text (e.g., "Not Found") for standard error codes is known by this function.
-A body of the error message, to explain the error in more detail, can be specified using the `fmt` format specifier and additional arguments. The `fmt` format specifier works like for the `printf()` function in the standard C library.
+### 示例代码
 
+```c
+mg_send_http_error(conn, 404, "The requested resource %s was not found on this server.", requested_resource);
+```
 
-### See Also
+### 参考
 
 * [`mg_send_http_ok();`](mg_send_http_ok.md)
 * [`mg_send_http_redirect();`](mg_send_http_redirect.md)
-

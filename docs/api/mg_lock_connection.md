@@ -1,21 +1,22 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_lock_connection( conn );`
+### `mg_lock_connection(conn);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
-|**`conn`**|`struct mg_connection *`|The connection to retrieve a lock|
+| 参数 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| **`conn`** | `struct mg_connection *` | 需要获取锁的连接 |
 
-### Return Value
+### 返回值
 
-*none*
+*无*
 
-### Description
+### 说明
 
-The function `mg_lock_connection()` is specifically for websocket connections to lock connection. Using this function in combination with [`mg_unlock_connection();`](mg_unlock_connection.md) is necessary around [`mg_write()`](mg_write.md) and [`mg_printf()`](mg_printf.md) calls if the code has server-initiated communication, as well as with communication in direct response to a message.
+`mg_lock_connection()` 函数专门用于 WebSocket 连接，以锁定连接。如果代码中有服务器主动发起的通信，或者直接响应消息的通信，则在调用 [`mg_write()`](mg_write.md) 和 [`mg_printf()`](mg_printf.md) 时，必须与 [`mg_unlock_connection();`](mg_unlock_connection.md) 配合使用。
 
-### See Also
+### 参考
 
 * [`mg_lock_context();`](mg_lock_context.md)
 * [`mg_printf();`](mg_printf.md)

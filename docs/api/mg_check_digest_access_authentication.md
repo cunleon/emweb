@@ -1,33 +1,31 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_check_digest_access_authentication( conn, realm, filename );`
+### `mg_check_digest_access_authentication(conn, realm, filename);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`struct mg_connection *`| A pointer to the connection to be used to send data |
-|**`realm`**|`const char *`| The requested authentication realm or NULL |
-|**`filename`**|`const char *`| The path to the passwords file |
+| **`conn`** | `struct mg_connection *` | 指向用于发送数据的连接的指针 |
+| **`realm`** | `const char *` | 请求的认证领域（realm），或为 NULL |
+| **`filename`** | `const char *` | 密码文件的路径 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`| An integer indicating success or failure |
+| `int` | 表示成功或失败的整数 |
 
-### Description
+### 说明
 
-此函数可用于检查请求标头是否包含 HTTP 摘要身份验证信息，匹配密码文件中编码的用户和密码。
-如果身份验证域（也称为身份验证域）为 NULL，则参数使用服务器配置 （'mg_start（）'） 中指定的 'authentication_domain' 。
+此函数用于检查请求头是否包含与密码文件中编码的用户名和密码匹配的 HTTP 摘要认证信息。如果认证领域（也称为认证域）为 NULL，则使用服务器配置（`mg_start()`）中指定的 `authentication_domain` 参数。
 
-正返回值表示用户名、领域和正确的密码哈希值在 passwords 文件中找到。
-返回 0 表示读取密码文件成功，但没有匹配的用户realm 和 password 的 STATE 文件。
-该函数在出错时返回负数。
+返回值为正数表示在密码文件中找到了用户名、领域和正确的密码哈希。  
+返回值为 0 表示密码文件读取成功，但未找到匹配的用户名、领域和密码。  
+函数在发生错误时返回负数。
 
-### See Also
+### 参考
 
 * [`mg_send_digest_access_authentication_request();`](mg_send_digest_access_authentication_request.md)
 * [`mg_modify_passwords_file();`](mg_modify_passwords_file.md)
 * [`mg_start();`](mg_start.md)
-

@@ -1,32 +1,34 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_set_websocket_handler( ctx, uri, connect_handler, ready_handler, data_handler, close_handler, cbdata );`
+### `mg_set_websocket_handler(ctx, uri, connect_handler, ready_handler, data_handler, close_handler, cbdata);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`ctx`**|`mg_context *`|The context in which to add the handlers|
-|**`uri`**|`const char *`|The URI for which the handlers should be activated|
-|**`connect_handler`**|`mg_websocket_connect_handler`|Handler called when a connect is signaled|
-|**`ready_handler`**|`mg_websocket_ready_handler`|Handler called when the connection is ready|
-|**`data_handler`**|`mg_websocket_data_handler`|Handler called when data is received|
-|**`close_handler`**|`mg_websocket_close_handler`|Handler called when the connection closes|
-|**`cbdata`**|`void *`|User defined data|
+| **`ctx`** | `mg_context *` | 要添加处理程序的上下文 |
+| **`uri`** | `const char *` | 要激活处理程序的 URI |
+| **`connect_handler`** | `mg_websocket_connect_handler` | 当连接被触发时调用的处理程序 |
+| **`ready_handler`** | `mg_websocket_ready_handler` | 当连接准备就绪时调用的处理程序 |
+| **`data_handler`** | `mg_websocket_data_handler` | 当接收到数据时调用的处理程序 |
+| **`close_handler`** | `mg_websocket_close_handler` | 当连接关闭时调用的处理程序 |
+| **`cbdata`** | `void *` | 用户自定义数据 |
 
-`int mg_websocket_connect_handler( const struct mg_connection *conn, void *cbdata );`
-`int mg_websocket_ready_handler( struct mg_connection *conn, void *cbdata );`
-`int mg_websocket_data_handler( struct mg_connection *conn, int opcode, char * buf, size_t buf_len, void *cbdata );`
-`int mg_websocket_close_handler( const struct mg_connection *conn,  void *cbdata );`
+```c
+int mg_websocket_connect_handler(const struct mg_connection *conn, void *cbdata);
+int mg_websocket_ready_handler(struct mg_connection *conn, void *cbdata);
+int mg_websocket_data_handler(struct mg_connection *conn, int opcode, char *buf, size_t buf_len, void *cbdata);
+int mg_websocket_close_handler(const struct mg_connection *conn, void *cbdata);
+```
 
-### Return Value
+### 返回值
 
-*none*
+无
 
-### Description
+### 描述
 
-The function `mg_set_websocket_handler()` connects callback functions to a websocket URI. The callback functions are called when a state change is detected on the URI like an incoming connection or data received from a remote peer.
+`mg_set_websocket_handler()` 函数将回调函数连接到 WebSocket URI。当 URI 上检测到状态变化（如传入连接或从远程对等方接收数据）时，回调函数会被调用。
 
-### See Also
+### 参见
 
-* [`mg_set_websocket_handler_with_subprotocols();`](mg_set_websocket_handler_with_subprotocols.md)
+* [mg_set_websocket_handler_with_subprotocols()](mg_set_websocket_handler_with_subprotocols.md)

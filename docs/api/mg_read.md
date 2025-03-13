@@ -1,53 +1,52 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_read( conn, buf, len );`
+### `mg_read(conn, buf, len);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`struct mg_connection *`| A pointer referencing the connection |
-|**`buf`**|`void *`| A pointer to the location where the received data can be stored |
-|**`len`**|`size_t`| The maximum number of bytes to be stored in the buffer |
+| **`conn`** | `struct mg_connection *` | 指向连接的指针 |
+| **`buf`** | `void *` | 指向存储接收数据的缓冲区地址 |
+| **`len`** | `size_t` | 缓冲区可存储的最大字节数 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`| The number of read bytes, or a status indication |
+| `int` | 读取的字节数，或状态指示 |
 
-### Description
+### 说明
 
-The function `mg_read()` receives data over an existing connection. The data is handled as binary and is stored in a buffer whose address has been provided as a parameter. The function returns the number of read bytes when successful, the value **0** when the connection has been closed by peer and a negative value when no more data could be read from the connection.
+`mg_read()` 函数用于通过现有连接接收数据。数据以二进制形式处理，并存储在作为参数提供的缓冲区中。函数成功时返回读取的字节数，如果连接被对端关闭，则返回 **0**，如果无法从连接中读取更多数据，则返回负值。
 
-### Example
+### 示例代码
 
-```
+```c
 #define RECV_BUF_SIZE 1 << 20
 
 size_t read_data(struct mg_connection* conn,
-                        uint8_t* buff,
-                        size_t buff_len) {
-  size_t read_len = 0;
-  while (read_len < buff_len) {
-    size_t sz_to_read = std::min<size_t>(RECV_BUF_SIZE, buff_len - read_len);
-    int this_read = mg_read(conn, buff + read_len, sz_to_read);
-    if (this_read < 0) {
-      std::cerr << "[error] Failed to read data" << std::endl;
-      break;
-    } else {
-      read_len += size_t(this_read);
-      if (this_read > 0) {
-        std::cout << "[debug] Received " << this_read << " more bytes" << std::endl;
-      }
+                 uint8_t* buff,
+                 size_t buff_len) {
+    size_t read_len = 0;
+    while (read_len < buff_len) {
+        size_t sz_to_read = (sz_to_read < RECV_BUF_SIZE) ? sz_to_read : RECV_BUF_SIZE;
+        int this_read = mg_read(conn, buff + read_len, sz_to_read);
+        if (this_read < 0) {
+            fprintf(stderr, "[error] Failed to read data\n");
+            break;
+        } else {
+            read_len += size_t(this_read);
+            if (this_read > 0) {
+                fprintf(stdout, "[debug] Received %d more bytes\n", this_read);
+            }
+        }
     }
-  }
-
-  return read_len;
+    return read_len;
 }
 ```
 
-### See Also
+### 参考
 
 * [`mg_printf();`](mg_printf.md)
 * [`mg_write();`](mg_write.md)

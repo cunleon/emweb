@@ -1,38 +1,31 @@
-# EmWeb API Reference
-EmWeb 克隆自 CivetWeb，目的是裁剪掉对自己没有用的功能，增加自己需要的特性
+# CivetWeb API 参考
 
-CivetWeb通常被用作大型应用程序内部的HTTP和HTTPS库。
-通过C API可以将CivetWeb的功能集成到更大的代码库中。
-本文档描述了公共C API。
+CivetWeb 通常用作大型应用程序中的 HTTP 和 HTTPS 库。通过 C API 可以将 CivetWeb 的功能集成到更大的代码库中。本文档描述了公共 C API。API 的基本用法示例可以在 [Embedding.md](Embedding.md) 中找到，也可以在示例目录中找到。
 
-## Macros
+C++ 封装器也可用于一些基本功能。请注意，只有 C API 提供的一小部分功能可以通过此 C++ 封装器访问。C++ 封装器未经过单元测试，也没有与此 C API 文档等效的 C++ API 文档。
 
-| Macro | Description |
+## 宏
+
+| 宏 | 描述 |
 | :--- | :--- |
-| **`CIVETWEB_VERSION`** | The current version of the software as a string with the major and minor version number separated with a dot. For version 1.9, this string will have the value "1.9", for the first patch of this version "1.9.1". |
-| **`CIVETWEB_VERSION_MAJOR`** | The current major version as number, e.g., (1) for version 1.9. |
-| **`CIVETWEB_VERSION_MINOR`** | The current minor version as number, e.g., (9) for version 1.9. |
-| **`CIVETWEB_VERSION_PATCH`** | The current patch version as number, e.g., (0) for version 1.9 or (1) for version 1.9.1. |
+| **`CIVETWEB_VERSION`** | 当前软件版本，以字符串形式表示，主版本号和次版本号用点号分隔。例如，版本 1.9 的值为 "1.9"，第一个补丁版本为 "1.9.1"。 |
+| **`CIVETWEB_VERSION_MAJOR`** | 当前主版本号，例如版本 1.9 的值为 (1)。 |
+| **`CIVETWEB_VERSION_MINOR`** | 当前次版本号，例如版本 1.9 的值为 (9)。 |
+| **`CIVETWEB_VERSION_PATCH`** | 当前补丁版本号，例如版本 1.9 的值为 (0)，版本 1.9.1 的值为 (1)。 |
 
-## Handles
+## 句柄
 
-* `struct mg_context *`
-表示一个 HTTP(S) 服务器实例的句柄。
-所有以 const struct mg_context * 作为参数的函数 不会修改 正在运行的服务器实例，仅用于查询信息。
-以非 const 的 struct mg_context * 作为参数的函数 可能修改 服务器实例（例如注册新 URI、停止服务器等操作）。
+* `struct mg_context *`  
+  用于表示一个 HTTP(S) 服务器实例的句柄。  
+  所有使用 `const struct mg_context *` 作为参数的函数不会修改正在运行的服务器实例，而只是查询信息。使用非 `const struct mg_context *` 作为参数的函数可能会修改服务器实例（例如，注册新的 URI、停止服务器等）。
 
-* `struct mg_connection *`
-表示 单个客户端-服务器连接 的句柄。
-使用 const struct mg_connection * 参数的函数：
-▶ 仅操作服务器已缓存的数据，不会 从客户端读取或向客户端发送数据。
-▶ 在回调函数中，若参数为 const struct mg_connection *，禁止调用 mg_read() 或 mg_write() 系列函数。
-使用 非 const 的 struct mg_connection * 参数的函数：
-▶ 需用于 读写操作（如接收请求体、发送响应等），以确保应用程序逻辑的正确性。
+* `struct mg_connection *`  
+  用于表示一个客户端-服务器连接的句柄。  
+  使用 `const struct mg_connection *` 的函数操作服务器已知的数据，而不会从客户端读取数据或向客户端发送数据。使用 `const struct mg_connection *` 作为参数的回调函数不应调用 `mg_read()` 和 `mg_write()` 系列的函数。为了支持正确的应用程序，读取和写入函数需要非 `const struct mg_connection *` 连接句柄。
 
-补充说明
-mg_context 和 mg_connection 结构体的具体内容未在接口中定义，开发者仅需将其视为 不透明指针（opaque pointers） 使用。
+这两个结构体的内容在接口中未定义——它们仅用作不透明指针（句柄）。
 
-## Structures
+## 结构体
 
 * [`struct mg_callbacks;`](api/mg_callbacks.md)
 * [`struct mg_client_cert;`](api/mg_client_cert.md)
@@ -47,16 +40,14 @@ mg_context 和 mg_connection 结构体的具体内容未在接口中定义，开
 * [`struct mg_server_port;`](api/mg_server_port.md)
 * [`struct mg_websocket_subprotocols;`](api/mg_websocket_subprotocols.md)
 
-## Library API Functions
+## 库 API 函数
 
 * [`mg_init_library( feature );`](api/mg_init_library.md)
 * [`mg_exit_library( feature );`](api/mg_exit_library.md)
-
 * [`mg_check_feature( feature );`](api/mg_check_feature.md)
 * [`mg_version();`](api/mg_version.md)
 
-
-## Server API Functions
+## 服务器 API 函数
 
 * [`mg_start( callbacks, user_data, options );`](api/mg_start.md)
 * [`mg_start2( init, error );`](api/mg_start2.md)
@@ -98,7 +89,7 @@ mg_context 和 mg_connection 结构体的具体内容未在接口中定义，开
 
 * [`mg_response_header_*();`](api/mg_response_header_X.md)
 
-## Client API Functions
+## 客户端 API 函数
 
 * [`mg_connect_client( host, port, use_ssl, error_buffer, error_buffer_size );`](api/mg_connect_client.md)
 * [`mg_connect_client_secure( client_options, error_buffer, error_buffer_size );`](api/mg_connect_client_secure.md)
@@ -113,8 +104,7 @@ mg_context 和 mg_connection 结构体的具体内容未在接口中定义，开
 * [`mg_connect_client2( host, protocol, port, path, init, error );`](api/mg_connect_client2.md)
 * [`mg_get_response2( conn, error, timeout );`](api/mg_get_response2.md)
 
-
-## Common API Functions
+## 通用 API 函数
 
 * [`mg_close_connection( conn );`](api/mg_close_connection.md)
 * [`mg_cry( conn, fmt, ... );`](api/mg_cry.md)
@@ -143,14 +133,13 @@ mg_context 和 mg_connection 结构体的具体内容未在接口中定义，开
 * [`mg_url_encode( src, dst, dst_len );`](api/mg_url_encode.md)
 * [`mg_write( conn, buf, len );`](api/mg_write.md)
 
-## Diagnosis Functions
+## 诊断函数
 
 * [`mg_get_system_info( buffer, buf_len );`](api/mg_get_system_info.md)
 * [`mg_get_context_info( ctx, buffer, buf_len );`](api/mg_get_context_info.md)
 * [`mg_get_connection_info( ctx, idx, buffer, buf_len );`](api/mg_get_connection_info.md)
 
-
-## Deprecated / removed:
+## 已弃用/移除的函数
 
 * [~~`mg_get_valid_option_names();`~~](api/mg_get_valid_option_names.md)
 * [~~`mg_upload( conn, destination_dir );`~~](api/mg_upload.md)

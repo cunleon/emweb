@@ -13,7 +13,7 @@
 
 ### Description
 
-The the `mgclient_options` structure contains host and security information to connect as a client to another host. A parameter of this type is used in the call to the function [`mg_connect_client_secure();`](mg_connect_client_secure.md). Please note that IPv6 addresses are only permitted if IPv6 support was enabled during compilation. You can use the function [`mg_check_feature()`](mg_check_feature.md) with the parameter `USE_IPV6` while running your application to check if IPv6 is supported.
+mgclient_options结构体包含主机和安全信息，用于作为客户端连接到其他主机。这种类型的参数用于调用函数mg_connect_client_secure()。请注意，只有在编译时启用了IPv6支持，才允许使用IPv6地址。您可以在运行应用程序时使用mg_check_feature()函数，传入参数USE_IPV6来检查是否支持IPv6。
 
 ### See Also
 

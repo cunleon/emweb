@@ -1,41 +1,46 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_send_http_redirect( conn, target_url, redirect_code );`
+### `mg_send_http_redirect(conn, target_url, redirect_code);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`struct mg_connection *`|The connection over which the data must be sent|
-|**`target_url`**|`const char *`|The new target location|
-|**`redirect_code`**|`int`|HTTP redirect response code|
+| **`conn`** | `struct mg_connection *` | 用于发送数据的连接 |
+| **`target_url`** | `const char *` | 新的目标位置 |
+| **`redirect_code`** | `int` | HTTP 重定向响应码 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
-|`int`| An integer indicating success (>=0) or failure (<0) |
+| 类型 | 描述 |
+| :--- | :--- |
+| `int` | 表示成功（>=0）或失败（<0）的整数 |
 
+### 说明
 
-### Description
+`mg_send_http_redirect()` 函数用于发送 "HTTP 30x ..." 重定向响应。
 
-The function `mg_send_http_redirect()` can be used to send a "HTTP 30x ..." redirect response.
+客户端（浏览器）将被重定向到由 `target_url` 指定的新位置。该位置可以是相对 URL 或绝对 URL。
 
-The new location sent to the client (browser) is specified by `target_url`.  The location could be a relative or an absolute URL.
+参数 `redirect_code` 定义了发送的重定向类型：
 
-The parameter `redirect_code` defines, what kind of redirect is sent:
+| `redirect_code` | 类型 | HTTP 方法 |
+| :---: | :--- | :--- |
+| 301 | 永久重定向 | - |
+| 302 | 临时重定向 | - |
+| 303 | 临时重定向 | 始终使用 GET |
+| 307 | 临时重定向 | 使用相同方法 |
+| 308 | 永久重定向 | 使用相同方法 |
 
-|`redirect_code`|type|HTTP method|
-|301|permanent redirect||
-|302|temporary redirect||
-|303|temporary redirect|always use GET|
-|307|temporary redirect|use same method|
-|308|permanent redirect|use same method|
+状态码 301 和 302 定义于 HTTP/1.0，而状态码 303、307 和 308 定义于 HTTP/1.1。对于 HTTP/1.1 的重定向，明确指定了重定向的 POST 请求是否应保持为 POST 请求（307、308）还是应改为 GET 请求（303）到新目标位置。不建议在非 GET 请求中使用 302，因为某些浏览器将其实现为 303，而另一些浏览器将其实现为 307。
 
-Status codes 301 and 302 were defined in HTTP/1.0, status codes 303, 307 and 308 were defined in HTTP/1.1.  For HTTP/1.1 redirects, it is explicitly defined if a redirected POST request should remain a POST request (307, 308) or should be a GET request (303) to the new target location.  Using 302 is not recommended for other requests than GET, since some browsers used to implement it as 303, others as 307.
+### 示例代码
 
+```c
+mg_send_http_redirect(conn, "https://example.com/new_location", 302);
+```
 
-### See Also
+### 参考
 
 * [`mg_send_http_error();`](mg_send_http_error.md)
 * [`mg_send_http_ok();`](mg_send_http_ok.md)
-

@@ -1,21 +1,20 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
 ### `struct mg_init_data;`
 
-### Fields
+### 字段
 
-| Field | Type | Description |
+| 字段 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`callbacks`**|`const struct mg_callbacks *`| A structure with optional callback functions to process requests from the web server |
-|**`user_data`**|`void *`| A pointer to optional user data |
-|**`configuration_options`**|`const char **`| A list of options used to initialize the web server. The list consists of an NULL terminated list of option-value string pairs. |
+| **`callbacks`** | `const struct mg_callbacks *` | 一个包含可选回调函数的结构体，用于处理来自 Web 服务器的请求 |
+| **`user_data`** | `void *` | 指向可选用户数据的指针 |
+| **`configuration_options`** | `const char **` | 用于初始化 Web 服务器的选项列表。该列表由以 NULL 结尾的选项-值字符串对组成 |
 
-### Description
+### 说明
 
-The structure `mg_init_data` is used in [`mg_start2()`](mg_start.md) and [`mg_connect_client2();`](mg_connect_client2.md).
-It holds the same parameters supplied to [`mg_start();`](mg_start.md) as individual arguments in one structure.
+`struct mg_init_data` 结构体用于 [`mg_start2()`](mg_start2.md) 和 [`mg_connect_client2();`](mg_connect_client2.md)。它将原本作为单独参数传递给 [`mg_start();`](mg_start.md) 的参数封装在一个结构体中。
 
-### See Also
+### 参考
 
 * [`struct mg_callbacks;`](mg_callbacks.md)
 * [`mg_start();`](mg_start.md)

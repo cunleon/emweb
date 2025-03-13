@@ -1,26 +1,26 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_set_request_handler( ctx, uri, handler, cbdata );`
+### `mg_set_request_handler(ctx, uri, handler, cbdata);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`ctx`**|`struct mg_context *`|The context where the handler must be active|
-|**`uri`**|`const char *`|The URI to hook the handler on|
-|**`handler`**|`mg_request_handler`|Callback function doing the heavy lifting|
-|**`cbdata`**|`void *`|Optional user supplied data|
+| **`ctx`** | `struct mg_context *` | 需要激活处理器的上下文 |
+| **`uri`** | `const char *` | 需要绑定处理器的 URI |
+| **`handler`** | `mg_request_handler` | 执行主要工作的回调函数 |
+| **`cbdata`** | `void *` | 可选的用户自定义数据 |
 
-`int mg_request_handler( struct mg_connection *conn, void *cbdata );`
+`int mg_request_handler(struct mg_connection *conn, void *cbdata);`
 
-### Return Value
+### 返回值
 
-*none*
+*无*
 
-### Description
+### 描述
 
-The function `mg_set_request_handler()` hooks a callback function on a URI. That callback function is called whenever a client requests the specific URI. The callback function receives the connection information and optional user supplied data as parameters and can serve information back to the client. When the callback function does not send any information back to the client, it should return **0** to signal Civetweb that the Civetweb core should handle the request. A return value between 1 and 999 is used to tell Civetweb that the request has been handled and no further processing is necessary. The returned code is stored as the status code in the access log, it is therefore recommended, although not mandatory to return a status code which matches the state of the request.
+`mg_set_request_handler()` 函数将一个回调函数绑定到一个 URI 上。每当客户端请求该特定 URI 时，回调函数就会被调用。回调函数接收连接信息和可选的用户自定义数据作为参数，并可以向客户端返回信息。如果回调函数没有向客户端返回任何信息，则应返回 **0**，以通知 Civetweb 核心处理该请求。返回值在 1 到 999 之间表示请求已被处理，无需进一步处理。返回的代码将作为状态码存储在访问日志中，因此建议（但不是强制要求）返回与请求状态匹配的状态码。
 
-### See Also
+### 参见
 
 * [`mg_set_auth_handler();`](mg_set_auth_handler.md)

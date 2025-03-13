@@ -1,24 +1,24 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_option( ctx, name );`
+### `mg_get_option(ctx, name);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`ctx`**|`const struct mg_context *`| A pointer to the webserver context |
-|**`name`**|`const char *`| The name of the option to query |
+| **`ctx`** | `const struct mg_context *` | 指向 Web 服务器上下文的指针 |
+| **`name`** | `const char *` | 要查询的选项名称 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`const char *`| A pointer to the option value in text, or NULL if an error occurred |
+| `const char *` | 指向选项值的文本字符串的指针，如果发生错误则返回 NULL |
 
-### Description
+### 说明
 
-When starting the CivetWeb webserver, options are provided to set the wanted behaviour of the server. The options which were used during startup can be queried through the `mg_get_option()` function. Options are read-only and cannot be changed while the webserver is running. The function returns a pointer to a text string containing the value of the queried option, or NULL if an error occurred. It is guaranteed however that if a valid option name is provided as a parameter to this function, that a pointer to a string is returned and not NULL. In case an option was empty or NULL during initialisation, `mg_get_option()` will return a pointer to an empty string.
+在启动 CivetWeb Web 服务器时，会提供一些选项以设置服务器的行为。通过 `mg_get_option()` 函数可以查询启动时使用的选项。这些选项是只读的，无法在服务器运行时更改。该函数返回一个指向查询选项值的文本字符串的指针，如果发生错误则返回 NULL。然而，如果提供了一个有效的选项名称作为参数，该函数保证返回一个指向字符串的指针，而不是 NULL。如果某个选项在初始化时为空或为 NULL，`mg_get_option()` 将返回一个指向空字符串的指针。
 
-### See Also
+### 参考
 
 * [`mg_start();`](mg_start.md)

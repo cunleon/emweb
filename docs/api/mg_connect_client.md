@@ -20,7 +20,7 @@
 
 ### Description
 
-The function `mg_connect_client()` connects to a TCP server as a client. This server can be a HTTP server but this is not necessary. The function returns a pointer to a connection structure when the connection is established and NULL otherwise. The host may be on IPv4 or IPv6, but IPv6 is not enabled in every Civetweb installation. Specifically the use of IPv6 communications has to be enabled when the library is compiled. At runtime you can use the [`mg_check_feature()`](mg_check_feature.md) function with the parameter `USE_IPV6` to check if IPv6 communication is supported.
+mg_connect_client() 函数作为客户端连接到一个 TCP 服务器。该服务器可以是一个 HTTP 服务器，但并非必须如此。当连接成功建立时，函数返回一个指向连接结构体的指针，否则返回 NULL。目标主机可以是 IPv4 或 IPv6，但并非所有 Civetweb 安装都支持 IPv6。具体来说，IPv6 通信功能必须在编译库时启用。在运行时，可以使用函数 mg_check_feature() 并传入参数 USE_IPV6 来检查是否支持 IPv6 通信。
  
 ### See Also
 

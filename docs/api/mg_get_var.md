@@ -1,30 +1,33 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_var( data, data_len, var_name, dst, dst_len );`
+### `mg_get_var(data, data_len, var_name, dst, dst_len);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`data`**|`const char *`|Encoded buffer from either POST data or the URI of a GET call|
-|**`data_len`**|`size_t`|Size of the encode buffer including the terminating NULL|
-|**`var_name`**|`const char *`|Name of the variable to search for|
-|**`dst`**|`char *`|Output buffer to store the content of the variable|
-|**`dst_len`**|`size_t`|Length of the output buffer|
+| **`data`** | `const char *` | 来自 POST 数据或 GET 请求 URI 的编码缓冲区 |
+| **`data_len`** | `size_t` | 编码缓冲区的大小，包括终止符 NULL |
+| **`var_name`** | `const char *` | 要查找的变量名称 |
+| **`dst`** | `char *` | 用于存储变量内容的输出缓冲区 |
+| **`dst_len`** | `size_t` | 输出缓冲区的长度 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|The length of the variable or an error code|
+| `int` | 成功时返回变量的长度，或返回错误代码 |
 
-### Description
+### 说明
 
-The function `mg_get_var()` returns the value of a variable which is passed to the server with either a POST method, or as a parameter in the URI of a GET call. The data pointer passed to the function points to a form-URI encoded buffer. This can either be POST data or the `request_info.query_string`. The name of the searched variable and a buffer to store the results are also parameters to the function.
+`mg_get_var()` 函数用于从通过 POST 方法或 GET 请求 URI 传递给服务器的变量中获取值。函数接收的 `data` 指针指向一个表单 URI 编码的缓冲区，这可以是 POST 数据或 `request_info.query_string`。函数的参数还包括要查找的变量名称和用于存储结果的缓冲区。
 
-The function either returns the length of the variable when successful, **`-1`** if the variable could not be found and **`-2`** if the destination buffer is NULL, has size zero or is too small to store the resulting variable value.
+函数返回值如下：
+- 成功时返回变量的长度。
+- 如果未找到变量，返回 **`-1`**。
+- 如果目标缓冲区为 NULL、大小为零或不足以存储变量值，则返回 **`-2`**。
 
-### See Also
+### 参考
 
 * [`mg_get_cookie();`](mg_get_cookie.md)
 * [`mg_get_var2();`](mg_get_var2.md)

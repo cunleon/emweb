@@ -4,40 +4,42 @@
 
 ### Fields
 
-|Field|Description|
+| 字段 | 描述 |
 |:---|:---|
-|**`field_found`**|**`int field_found( const char *key, const char *filename, char *path, size_t pathlen, void *user_data )`**;|
-||The callback function `field_found()` is called when a new field has been found. The return value of this callback is used to define how the field should be processed. The parameters contain the following information:|
-||**`key`** - The name of the field as it was named with the `name` tag in the HTML source.|
-||**`filename`** - The name of the file to upload. Please note that this parameter is only valid when the input type was set to `file`. Otherwise this parameter has the value `NULL`.|
-||**`path`** - This is an output parameter used to store the full name of the file including the path to store an incoming file at the computer. This parameter must be provided by the application to Civetweb when a form field of type `file` is found. Please not that together with setting this parameter, the callback function must return `FORM_FIELD_STORAGE_STORE`.i With any other return value the contents of the `path` buffer is ignored by Civetweb.|
-||**`pathlen`** - The length of the buffer where the output path can be stored.|
-||**`user_data`** - A pointer to the value of the field `user_data` of the structure `struct mg_form_data_handler`.|
-||The callback function `field_found()` can return the following values back to Civetweb:|
-||**`FORM_FIELD_STORAGE_SKIP`** - Ignore the field and continue with processing the next field|
-||**`FORM_FIELD_STORAGE_GET`** - Call the callback function `field_get()` to receive the form data|
-||**`FORM_FIELD_STORAGE_STORE`** - Store a file as `path` and overwrite that file if it already exists|
-||**`FORM_FIELD_STORAGE_ABORT`** - Stop parsing the request and ignore all remaining form fields|
-|**`field_get`**|**`int field_get( const char *key, const char *value, size_t valuelen, void *user_data );`**|
-||If the callback function `field_found()` returned `FORM_FIELD_STORAGE_GET`, Civetweb will call `field_get()` one or more times to pass back the data for this field.|
-||**`key`** - the name of the field being decoded, note this is only passed on the first call for file parameters (bug?)|
-||**`value`** - a pointer to the data read so far from the field's value|
-||**`valuelen`** - the size of the data in the value for this call to `field_get()`|
-||**`user_data`** - A pointer to the value of the field `user_data` of the structure `struct mg_form_data_handler`.|
-||**`return` `MG_FORM_FIELD_HANDLE_GET`** - to continue calling get until all data has been received. |
-||**`return` `MG_FORM_FIELD_HANDLE_NEXT`** - to skip further calls to get for this field and move on to the next field. |
-||**`return` `MG_FORM_FIELD_HANDLE_ABORT`** - to stop parsing this form and abandon the search for further fields. |
-|**`field_store`**|**`int field_store( const char *path, long long file_size, void *user_data );`**|
-||If the callback function `field_found()` returned `FORM_FIELD_STORAGE_STORE`, Civetweb will try to store the received data in a file. If writing the file is successful, the callback function `field_store()` is called. This function is only called after completion of a full upload, not if a file has only partly been uploaded. When only part of a file is received, Civetweb will delete that partly upload in the background and not inform the main application through this callback. The following parameters are provided in the function call|
-||**`path`** - The path on the server where the file was stored|
-||**`file_size`** - The size of the stored file in bytes|
-||**`user_data`** - The value of the field `user_data` when the callback functions were registered with a call to `mg_handle_form_request();`|
-|**`user_data`**|**`void *`** |
-||The `user_data` field is a user supplied argument that will be passed as parameter to each of callback functions|
+| **`field_found`** | **`int field_found(const char *key, const char *filename, char *path, size_t pathlen, void *user_data)`**; |
+| | `field_found()` 回调函数在发现新字段时被调用。该回调的返回值用于定义字段的处理方式。参数包含以下信息： |
+| | **`key`** - 字段的名称，与 HTML 源代码中 `name` 标签的名称一致。 |
+| | **`filename`** - 要上传的文件名。请注意，仅当输入类型为 `file` 时，此参数才有效。否则，此参数为 `NULL`。 |
+| | **`path`** - 输出参数，用于存储传入文件在计算机上的完整路径（包括文件名）。当发现类型为 `file` 的表单字段时，应用程序必须提供此参数给 Civetweb。请注意，设置此参数时，回调函数必须返回 `FORM_FIELD_STORAGE_STORE`。如果返回其他值，Civetweb 将忽略 `path` 缓冲区的内容。 |
+| | **`pathlen`** - 存储输出路径的缓冲区长度。 |
+| | **`user_data`** - 指向 `struct mg_form_data_handler` 结构体中 `user_data` 字段的值。 |
+| | `field_found()` 回调函数可以向 Civetweb 返回以下值： |
+| | **`FORM_FIELD_STORAGE_SKIP`** - 忽略该字段并继续处理下一个字段。 |
+| | **`FORM_FIELD_STORAGE_GET`** - 调用回调函数 `field_get()` 以接收表单数据。 |
+| | **`FORM_FIELD_STORAGE_STORE`** - 将文件存储到 `path` 并覆盖已存在的文件。 |
+| | **`FORM_FIELD_STORAGE_ABORT`** - 停止解析请求并忽略所有剩余的表单字段。 |
+| **`field_get`** | **`int field_get(const char *key, const char *value, size_t valuelen, void *user_data)`** |
+| | 如果回调函数 `field_found()` 返回 `FORM_FIELD_STORAGE_GET`，Civetweb 将调用 `field_get()` 一次或多次，以传递该字段的数据。 |
+| | **`key`** - 正在解码的字段名称，注意此参数仅在文件参数的第一次调用时传递（可能是 bug）。 |
+| | **`value`** - 指向字段值中已读取的数据。 |
+| | **`valuelen`** - 本次调用中 `value` 的数据大小。 |
+| | **`user_data`** - 指向 `struct mg_form_data_handler` 结构体中 `user_data` 字段的值。 |
+| | **返回值**： |
+| | **`MG_FORM_FIELD_HANDLE_GET`** - 继续调用 `get`，直到接收所有数据。 |
+| | **`MG_FORM_FIELD_HANDLE_NEXT`** - 跳过该字段的后续调用并转到下一个字段。 |
+| | **`MG_FORM_FIELD_HANDLE_ABORT`** - 停止解析表单并放弃进一步查找字段。 |
+| **`field_store`** | **`int field_store(const char *path, long long file_size, void *user_data)`** |
+| | 如果回调函数 `field_found()` 返回 `FORM_FIELD_STORAGE_STORE`，Civetweb 将尝试将接收到的数据存储到文件中。如果文件写入成功，将调用回调函数 `field_store()`。此函数仅在完整上传完成后调用，而不是在文件仅部分上传时调用。如果仅接收到部分文件，Civetweb 将在后台删除这部分上传文件，而不会通过此回调通知主应用程序。函数调用时提供以下参数： |
+| | **`path`** - 文件在服务器上的存储路径。 |
+| | **`file_size`** - 存储文件的大小（以字节为单位）。 |
+| | **`user_data`** - 在调用 `mg_handle_form_request()` 注册回调函数时，`user_data` 字段的值。 |
+| **`user_data`** | **`void *`** |
+| | `user_data` 字段是一个用户提供的参数，将在每个回调函数中作为参数传递。 |
+
 
 ### Description
 
-The structure `struct mg_form_data_handler` contains callback functions for handling form fields. Form fields give additional information back from a web page to the server which can be processed by these callback functions.
+struct mg_form_data_handler 结构体包含用于处理表单字段的回调函数。表单字段可以将网页上的附加信息发送回服务器，这些信息可以通过这些回调函数进行处理。
 
 ### See Also
 

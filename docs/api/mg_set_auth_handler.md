@@ -1,39 +1,60 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_set_auth_handler( ctx, uri, handler, cbdata );`
+### `mg_set_auth_handler(ctx, uri, handler, cbdata);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`ctx`**|`struct mg_context *`|The context on which the handler must be set|
-|**`uri`**|`const char *`|The URI for the authorization handler|
-|**`handler`**|`mg_authorization_handler`|Callback function doing the actual authorization|
-|**`cbdata`**|`void *`|Optional user data|
+| **`ctx`** | `struct mg_context *` | 要设置处理器的上下文 |
+| **`uri`** | `const char *` | 授权处理器对应的 URI |
+| **`handler`** | `mg_authorization_handler` | 执行实际授权的回调函数 |
+| **`cbdata`** | `void *` | 可选的用户数据 |
 
-`int mg_authorization_handler( struct mg_connection *conn, void *cbdata );`
+回调函数类型：
+```c
+int mg_authorization_handler(struct mg_connection *conn, void *cbdata);
+```
 
-### Return Value
+### 返回值
 
-*none*
+*无*
 
-### Description
+### 说明
 
-The function `mg_set_auth_handler()` hooks an authorization function to an URI to check if a user is authorized to visit that URI. The check is performed by a callback function of type `mg_authorization_handler`. The callback function is passed two parameters: the current connection and a pointer to optional user defined data which was passed to `mg_set_auth_handler()` when the callback was hooked to the URI.
+`mg_set_auth_handler()` 函数将授权函数绑定到指定的 URI，用于检查用户是否有权限访问该 URI。授权检查由类型为 `mg_authorization_handler` 的回调函数执行。回调函数接收两个参数：当前连接和一个指向用户定义数据的指针（该指针是在调用 `mg_set_auth_handler()` 时传递的）。
 
-The callback function can return **0** to deny access, and **1** to allow access.
+回调函数可以返回：
+- **0**：拒绝访问
+- **1**：允许访问
 
-To allow maximum flexibility in the HTTP response status code and message when denying access, the callback should
-send the HTTP response itself. 
-The callback may send use [`mg_send_digest_access_authentication_request`](mg_send_digest_access_authentication_request.md) to ask for http digest authentication,
-it may send a http 403 status code using [`mg_send_http_error`](mg_set_request_handler.md), 
-or a 303 redirect to a login page using [`mg_send_http_redirect`](mg_send_http_redirect.md) 
-or any other response.
+为了在拒绝访问时提供最大的灵活性，回调函数应自行发送 HTTP 响应。例如：
+- 可以使用 [`mg_send_digest_access_authentication_request`](mg_send_digest_access_authentication_request.md) 请求 HTTP 摘要认证。
+- 可以使用 [`mg_send_http_error`](mg_send_http_error.md) 发送 HTTP 403 状态码。
+- 可以使用 [`mg_send_http_redirect`](mg_send_http_redirect.md) 发送 303 重定向到登录页面。
+- 或者发送其他任何自定义响应。
 
-The `mg_set_auth_handler()` function is very similar in use to [`mg_set_request_handler()`](mg_set_request_handler.md).
+`mg_set_auth_handler()` 函数的使用方式与 [`mg_set_request_handler`](mg_set_request_handler.md) 非常相似。
 
-### See Also
+### 示例代码
+
+```c
+int my_auth_handler(struct mg_connection *conn, void *cbdata) {
+    // 检查用户是否已认证
+    if (user_is_authenticated(conn)) {
+        return 1; // 允许访问
+    } else {
+        mg_send_http_error(conn, 403, "Access Denied");
+        return 0; // 拒绝访问
+    }
+}
+
+// 在 Civetweb 上下文中设置授权处理器
+mg_set_auth_handler(ctx, "/protected", my_auth_handler, NULL);
+```
+
+### 参考
 
 * [`mg_set_request_handler();`](mg_set_request_handler.md)
-* [`mg_send_http_error();`](mg_set_request_handler.md)
+* [`mg_send_http_error();`](mg_send_http_error.md)
 * [`mg_send_http_redirect();`](mg_send_http_redirect.md)

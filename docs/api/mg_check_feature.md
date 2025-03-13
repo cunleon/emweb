@@ -1,38 +1,40 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_check_feature( feature );`
+### `mg_check_feature(feature);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`feature`**|`unsigned`| A value indicating the feature to be checked |
+| **`feature`** | `unsigned` | 表示要检查的功能的值 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`unsigned`| A value indicating if a feature is available. A positive value indicates available, while **0** is returned for an unavailable feature |
+| `unsigned` | 表示功能是否可用的值。正值表示功能可用，而返回 **0** 表示功能不可用 |
 
-### Description
+### 说明
 
-可以从应用程序调用函数 'mg_check_feature（）' 来检查应用程序链接到的 civetweb 版本中是否已编译特定功能。要检查的特征以无符号整数参数的形式提供。如果该函数在当前链接的库版本中可用，则返回值 **> 0**。否则，函数 'mg_check_feature（）' 返回值 **0**。
+`mg_check_feature()` 函数可用于检查应用程序链接到的 CivetWeb 版本是否编译了特定功能。要检查的功能以无符号整数参数提供。如果当前链接的库版本中包含该功能，则返回值 **> 0**，否则返回 **0**。
 
 可以使用以下参数值：
 
-|价值 |编译选项 |描述 |
-|:---: |:---: |:--- |
-|**1** |NO_FILES |*能够提供文件*。如果此功能可用，则 Web 服务器能够直接从目录树提供文件。|
-|**2** |NO_SSL |*支持 HTTPS*。如果此功能可用，则 Web 服务器货车将在客户端-服务器连接中使用加密。支持 SSLv2、SSLv3、TLSv1.0、TLSv1.1 和 TLSv1.2 取决于 CivetWeb 编译时使用的 SSL 库，但是在服务器运行时有效使用哪些协议取决于服务器启动时使用的选项。|
-|**4** |NO_CGI |*支持 CGI*。如果此功能可用，则 Web 服务器可以调用外部 CGI 脚本。|
-|**8** |USE_IPV6 |*支持 IPv6*。CivetWeb 库能够通过 IPv4 和 IPv6 进行通信，但 IPv6 支持仅在编译时启用后才可用。|
-|**16** |USE_WEBSOCKET |支持 Web 套接字。如果在 cimpile 期间使用了正确的选项，则 CivetWeb 库中提供了 WebSockets 支持。|
-|**32** |USE_LUA |*支持 Lua 脚本和 Lua 服务器页面*。CivetWeb 通过 Lua 语言支持服务器端脚本，如果在编译时启用了该语言。Lua 是一种高效的脚本语言，它比 PHP 占用的资源更少。|
-|**64** |USE_DUKTAPE |*支持服务器端 JavaScript*。如果在编译时设置了适当的选项，则可以使用服务器端 JavaScript 生成动态页面。请注意，如果在连接浏览器中启用了客户端 JavaScript 执行，则它始终可用。|
-|**128** |NO_CACHING |*支持缓存*。如果在编译库时未禁用缓存，则 Web 服务器将支持缓存。|
+| 值 | 编译选项 | 描述 |
+| :---: | :---: | :--- |
+| **1** | NO_FILES | *支持文件服务*。如果此功能可用，Web 服务器能够直接从目录树中提供文件。 |
+| **2** | NO_SSL | *支持 HTTPS*。如果此功能可用，Web 服务器可以在客户端与服务器之间的连接中使用加密。支持的协议取决于编译时使用的 SSL 库（SSLv2、SSLv3、TLSv1.0、TLSv1.1 和 TLSv1.2），但实际运行时使用的协议取决于启动服务器时的选项。 |
+| **4** | NO_CGI | *支持 CGI*。如果此功能可用，Web 服务器可以调用外部 CGI 脚本。 |
+| **8** | USE_IPV6 | *支持 IPv6*。CivetWeb 库支持 IPv4 和 IPv6 通信，但 IPv6 支持必须在编译时启用。 |
+| **16** | USE_WEBSOCKET | *支持 WebSocket*。如果编译时使用了适当的选项，CivetWeb 库将支持 WebSocket。 |
+| **32** | USE_LUA | *支持 Lua 脚本和 Lua 服务器页面*。如果在编译时启用，CivetWeb 支持通过 Lua 语言进行服务器端脚本编写。Lua 是一种高效的脚本语言，资源占用比 PHP 等语言更少。 |
+| **64** | USE_DUKTAPE | *支持服务器端 JavaScript*。如果编译时启用了适当的选项，可以使用服务器端 JavaScript 进行动态页面生成。请注意，客户端 JavaScript 的执行始终取决于连接的浏览器是否启用。 |
+| **128** | NO_CACHING | *支持缓存*。如果在编译库时未禁用，Web 服务器将支持缓存。 |
 
-除上述值以外的参数值将产生未定义的结果。因此，尽管 'mg_check_feature（）' 函数的参数值实际上是位掩码，但您不应假设在函数返回时，将其中两个值与 OR 组合为新值会得到任何有意义的结果。
-### See Also
+**注意**：  
+除了上述列出的值之外，其他参数值将导致未定义的结果。虽然 `mg_check_feature()` 函数的参数值实际上是位掩码，但不应假设将两个值通过 OR 操作组合成一个新值时，函数返回的结果会有任何实际意义。
+
+### 参考
 
 * [`mg_get_option();`](mg_get_option.md)
 * [~~`mg_get_valid_option_names();`~~](mg_get_valid_option_names.md)

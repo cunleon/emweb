@@ -1,31 +1,31 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
 ### `struct mg_option;`
 
-### Fields
+### 字段
 
-| Field | Type | Description |
+| 字段 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`name`**|`const char *`|Name of the option|
-|**`type`**|`int`|Type of the option|
-|**`default_value`**|`const char *`|Value of the option|
+| **`name`** | `const char *` | 选项的名称 |
+| **`type`** | `int` | 选项的类型 |
+| **`default_value`** | `const char *` | 选项的默认值 |
 
-### Description
+### 说明
 
-A list of valid configuration options of the Civetweb instance can be retrieved with a call to [`mg_get_valid_options()`](mg_get_valid_options.md). This function fills a list of `struct mg_option` structures where the content of each structure represents a configuration option. Each structure contains three fields. One field contains the name of the option, the second contains the value of the option and the third is an identifier used to define the type of the option and how the value contents should be interpreted.
+通过调用 [`mg_get_valid_options()`](mg_get_valid_options.md) 可以获取 Civetweb 实例的有效配置选项列表。该函数会填充一个 `struct mg_option` 结构体数组，每个结构体的内容代表一个配置选项。每个结构体包含三个字段：一个字段包含选项的名称，第二个字段包含选项的值，第三个字段是一个标识符，用于定义选项的类型以及如何解释值的内容。
 
-The field `type` can be one of the following values:
+字段 `type` 可以是以下值之一：
 
-|Value|Description|
+| 值 | 描述 |
 | :--- | :--- |
-|**`CONFIG_TYPE_UNKNOWN`**|The type of the option value is unknown|
-|**`CONFIG_TYPE_NUMBER`**|The option value is an integer|
-|**`CONFIG_TYPE_STRING`**|The option value is a number|
-|**`CONFIG_TYPE_FILE`**|The option value is a file name|
-|**`CONFIG_TYPE_DIRECTORY`**|The option value is a directory name|
-|**`CONFIG_TYPE_BOOLEAN`**|The option value is a boolean|
-|**`CONFIG_TYPE_EXT_PATTERN`**|The option value is a list of regular expression patterns|
+| **`CONFIG_TYPE_UNKNOWN`** | 选项值的类型未知 |
+| **`CONFIG_TYPE_NUMBER`** | 选项值是一个整数 |
+| **`CONFIG_TYPE_STRING`** | 选项值是一个字符串 |
+| **`CONFIG_TYPE_FILE`** | 选项值是一个文件名 |
+| **`CONFIG_TYPE_DIRECTORY`** | 选项值是一个目录名 |
+| **`CONFIG_TYPE_BOOLEAN`** | 选项值是一个布尔值 |
+| **`CONFIG_TYPE_EXT_PATTERN`** | 选项值是一个正则表达式模式列表 |
 
-### See Also
+### 参考
 
 * [`mg_get_valid_options();`](mg_get_valid_options.md)

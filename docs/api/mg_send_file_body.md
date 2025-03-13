@@ -1,28 +1,28 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_send_file_body( conn, path );`
+### `mg_send_file_body(conn, path);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`struct mg_connection *`|The connection over which the file must be sent|
-|**`path`**|`const char *`|The full path and filename of the file|
+| **`conn`** | `struct mg_connection *` | 用于发送文件的连接 |
+| **`path`** | `const char *` | 文件的完整路径和文件名 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
-|`int`| An integer indicating success (>=0) or failure (<0) |
+| 类型 | 描述 |
+| :--- | :--- |
+| `int` | 表示成功（>=0）或失败（<0）的整数 |
 
-### Description
+### 说明
 
-The function `mg_send_file_body()` sends the contents of a file over a connection to the remote peer without adding any HTTP headers. The code must send all required HTTP response headers before using this function.
+`mg_send_file_body()` 函数通过连接将文件的内容发送给远程对端，但不会添加任何 HTTP 头。在使用此函数之前，代码必须发送所有必需的 HTTP 响应头。
 
-### See Also
+### 参考
 
 * [`mg_send_file();`](mg_send_file.md)
 * [`mg_send_mime_file();`](mg_send_mime_file.md)
 * [`mg_send_mime_file2();`](mg_send_mime_file2.md)
 * [`mg_printf();`](mg_printf.md)
 * [`mg_write();`](mg_write.md)
-

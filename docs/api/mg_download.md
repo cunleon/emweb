@@ -22,14 +22,12 @@
 
 ### Description
 
-The `mg_download()` function is used to download data from a remote webserver. The server address can either be specified as a hostname or IP address and SSL can be used if needed. If the function succeeds, a pointer is returned to a connection structure. The connection must be closed with a call to the [`mg_close_connection()`](mg_close_connection.md) function.
+mg_download() 函数用于从远程 Web 服务器下载数据。服务器地址可以指定为主机名或 IP 地址，如果需要，可以使用 SSL。如果函数执行成功，将返回一个指向连接结构体的指针。连接必须通过调用 mg_close_connection.md 函数关闭。
+格式字符串是 printf() 系列函数中的格式字符串，用于指定远程命令。以下是一个从 Google 获取主页的示例调用：
 
-The format string is a format string from the `printf()` series of functions to specify the remote command. An example to get the main index page from Google is the following call:
-
-`conn = mg_download( "google.com", 80, 0, ebuf, sizeof(ebuf),
-                     "%s", "GET / HTTP/1.0\r\nHost: google.com\r\n\r\n" );`
-
-Please note that although Civetweb supports both IPv4 and IPv6 communication that IPv6 addressing is only available if it was enabled at compile time. When running an application it is possible to check if IPv6 support has been compiled in by using the [`mg_check_feature()`](md_check_feature.md) function with the parameter `USE_IPV6`.
+conn = mg_download("google.com", 80, 0, ebuf, sizeof(ebuf),
+                   "%s", "GET / HTTP/1.0\r\nHost: google.com\r\n\r\n");
+请注意，尽管 Civetweb 支持 IPv4 和 IPv6 通信，但 IPv6 地址仅在编译时启用时才可用。在运行应用程序时，可以通过使用带有参数 USE_IPV6 的函数 md_check_feature.md 来检查是否编译了 IPv6 支持。
 
 ### See Also
 

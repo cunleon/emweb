@@ -1,24 +1,24 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_context( conn );`
+### `mg_get_context(conn);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`const struct mg_connection *`|The connection for which the context has to be returned|
+| **`conn`** | `const struct mg_connection *` | 需要返回上下文的连接 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`struct mg_context *`|A pointer to the context of the given connection|
+| `struct mg_context *` | 指向给定连接上下文的指针 |
 
-### Description
+### 说明
 
-The function `mg_get_context()` returns the context associated with a connection.
+`mg_get_context()` 函数返回与连接相关联的上下文。
 
-### See Also
+### 参考
 
 * [`mg_start();`](mg_start.md)
 * [`mg_stop();`](mg_stop.md)

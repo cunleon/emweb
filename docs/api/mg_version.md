@@ -1,19 +1,21 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
 ### `mg_version();`
 
-### Parameters
+### 参数
 
-*none*
+*无*
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`const char *`| A pointer to a text with the current CivetWeb version |
+|`const char *`| 指向当前 CivetWeb 版本文本的指针 |
 
-### Description
+### 描述
 
-The function `mg_version()` can be used to return the current CivetWeb version.  The function returns a pointer to a string with the current major and minor version number separated with a dot, for example "1.9".
+函数 `mg_version()` 用于返回当前 CivetWeb 的版本。该函数返回一个指向字符串的指针，字符串中包含当前的主版本号和次版本号，用点号分隔，例如 "1.9"。
 
-### See Also
+### 相关函数
+
+*无*

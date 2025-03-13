@@ -1,124 +1,119 @@
-Building CivetWeb
+# 构建 CivetWeb
 =========
 
-This guide covers the build instructions for the stand-alone web server.
-See [Embedding.md](https://github.com/civetweb/civetweb/blob/master/docs/Embedding.md) for information on extending an existing C or C++ application. A brief overview of the source code files can be found in [Embedding.md](https://github.com/civetweb/civetweb/blob/master/docs/Embedding.md) as well.
+本指南涵盖了独立 Web 服务器的构建说明。有关扩展现有 C 或 C++ 应用程序的信息，请参阅 [Embedding.md](https://github.com/civetweb/civetweb/blob/master/docs/Embedding.md)。源代码文件的简要概述也可以在 [Embedding.md](https://github.com/civetweb/civetweb/blob/master/docs/Embedding.md) 中找到。
 
-#### Where to get the source code?
+#### 如何获取源代码？
 
-The latest development version can be found at
+最新的开发版本可以在以下地址找到：  
 https://github.com/civetweb/civetweb
 
-Tested and released versions can be found at
+经过测试和发布的版本可以在以下地址找到：  
 https://github.com/civetweb/civetweb/releases
 
 
-Building for Windows
+在 Windows 上构建
 ---------
 
-#### Using Visual Studio
+#### 使用 Visual Studio
 
-Open the *VS/civetweb.sln* in Visual Studio.
-To include SSL support, you may have to add an extra library for the cryptography support. You might wish to use yaSSL.  However, it is GPL licensed or uses a commercial license. See [yaSSL.md](https://github.com/civetweb/civetweb/blob/master/docs/yaSSL.md) for more information.
-Alternatively, you might wish to use OpenSSL. See [OpenSSL.md](https://github.com/civetweb/civetweb/blob/master/docs/OpenSSL.md) for more information.
+在 Visual Studio 中打开 *VS/civetweb.sln*。  
+要包含 SSL 支持，您可能需要为加密支持添加额外的库。您可以使用 yaSSL，但它使用 GPL 许可证或商业许可证。有关更多信息，请参阅 [yaSSL.md](https://github.com/civetweb/civetweb/blob/master/docs/yaSSL.md)。  
+或者，您可以使用 OpenSSL。有关更多信息，请参阅 [OpenSSL.md](https://github.com/civetweb/civetweb/blob/master/docs/OpenSSL.md)。
 
-#### Using MinGW-w64 or TDM-GCC
-In the start menu locate and run the "Run terminal" batch file. For TDM-GCC this is named "MinGW Command Prompt".
-Navigate to the civetweb sources directory and run:
+#### 使用 MinGW-w64 或 TDM-GCC
+在开始菜单中找到并运行“Run terminal”批处理文件。对于 TDM-GCC，此文件名为“MinGW Command Prompt”。  
+导航到 civetweb 源代码目录并运行：
 ```
 mingw32-make CC=gcc
 ```
 
-#### Using Qt Creator
-Open the Qt Designer project in the Qt folder
+#### 使用 Qt Creator
+打开 Qt 文件夹中的 Qt Designer 项目。
 
-#### Using CMake
-Except for the components in the `third_party` folder (e.g., Lua and Duktape), CivetWeb can also be built with CMake.
-CMake can be used for all supported operating systems.
+#### 使用 CMake
+除了 `third_party` 文件夹中的组件（例如 Lua 和 Duktape），CivetWeb 也可以使用 CMake 构建。CMake 可用于所有支持的操作系统。
 
 
-Building for Linux, BSD, and OSX
+在 Linux、BSD 和 OSX 上构建
 ---------
 
-## Using Make
+## 使用 Make
 
 ```
 make help
 ```
-Get a list of all supported make option
+获取所有支持的 make 选项列表。
 
 ```
 make build
 make WITH_ALL=1
 ```
-Compile the code.
-Using the option "WITH_ALL=1" enables all optional features.
+编译代码。  
+使用选项 "WITH_ALL=1" 启用所有可选功能。
 
 ```
 make install
 ```
-Install on the system, Linux only.
+在系统上安装，仅适用于 Linux。
 
 ```
 make lib WITH_IPV6=1
 make clean slib WITH_LUA=1 WITH_WEBSOCKET=1
 ```
-Build the static and shared libraries.
-The additional make options configure the library just as it would the application.
+构建静态和共享库。  
+额外的 make 选项配置库的方式与配置应用程序相同。
 
-The *slib* option should be done on a separate clean build as position
-independent code (PIC) is required for it.  Trying to run it after
-building the static library or the server will result in a link error.
+*slib* 选项应在单独的干净构建中完成，因为需要位置无关代码（PIC）。在构建静态库或服务器后尝试运行它会导致链接错误。
 
 ```
 make clean
 ```
-Clean up files generated during the build
+清理构建过程中生成的文件。
 
 
-## Setting build options
+## 设置构建选项
 
-Make options can be set on the command line with the make command like so.
+可以在命令行中使用 make 命令设置构建选项，例如：
 ```
 make build WITH_LUA=1
 ```
 
 
-| Make Options                | Description                                       |
+| Make 选项                | 描述                                       |
 | --------------------------- | ------------------------------------------------- |
-| `WITH_LUA=1`                | build with Lua support                            |
-| `WITH_DUKTAPE=1`            | build with server-side JavaScript support         |
-| `WITH_IPV6=1`               | with IPV6 support                                 |
-| `WITH_WEBSOCKET=1`          | build with web socket support                     |
-| `WITH_X_DOM_SOCKET=1`       | build with unix domain socket support             |
-| `WITH_SERVER_STATS=1`       | build with support for server statistics          |
-| `WITH_EXPERIMENTAL=1`       | include experimental features (version depending) |
-| `WITH_ALL=1`                | Include all of the above features                 |
-| `WITH_DEBUG=1`              | build with GDB debug support                      |
-| `WITH_CPP=1`                | build libraries with c++ classes                  |
-| `CONFIG_FILE=file`          | use 'file' as the config file                     |
-| `CONFIG_FILE2=file`         | use 'file' as the backup config file              |
-| `HTMLDIR=/path`             | place to install initial web pages                |
-| `DOCUMENT_ROOT=/path`       | default document root                             |
-| `PORTS=8080`                | listening ports override when installing          |
-| `SSL_LIB=libssl.so.0`       | use versioned SSL library                         |
-| `CRYPTO_LIB=libcrypto.so.0` | system versioned CRYPTO library                   |
-| `PREFIX=/usr/local`         | sets the install directory                        |
-| `COPT='-DNO_SSL'`           | method to insert compile flags                    |
+| `WITH_LUA=1`                | 构建支持 Lua 的版本                            |
+| `WITH_DUKTAPE=1`            | 构建支持服务器端 JavaScript 的版本         |
+| `WITH_IPV6=1`               | 支持 IPv6                                 |
+| `WITH_WEBSOCKET=1`          | 构建支持 WebSocket 的版本                     |
+| `WITH_X_DOM_SOCKET=1`       | 构建支持 Unix 域套接字的版本       |
+| `WITH_SERVER_STATS=1`       | 构建支持服务器统计的版本          |
+| `WITH_EXPERIMENTAL=1`       | 包含实验性功能（取决于版本） |
+| `WITH_ALL=1`                | 包含上述所有功能                 |
+| `WITH_DEBUG=1`              | 构建支持 GDB 调试的版本                      |
+| `WITH_CPP=1`                | 构建包含 C++ 类的库                  |
+| `CONFIG_FILE=file`          | 使用 'file' 作为配置文件                     |
+| `CONFIG_FILE2=file`         | 使用 'file' 作为备用配置文件              |
+| `HTMLDIR=/path`             | 安装初始网页的路径                |
+| `DOCUMENT_ROOT=/path`       | 默认文档根目录                     |
+| `PORTS=8080`                | 安装时覆盖监听端口          |
+| `SSL_LIB=libssl.so.0`       | 使用版本化的 SSL 库                         |
+| `CRYPTO_LIB=libcrypto.so.0` | 使用系统版本化的 CRYPTO 库                   |
+| `PREFIX=/usr/local`         | 设置安装目录                        |
+| `COPT='-DNO_SSL'`           | 插入编译标志的方法                    |
 
-Note that the WITH_* options used for *make* are not identical to the
-preprocessor defines in the source code - usually USE_* is used there.
+请注意，用于 *make* 的 WITH_* 选项与源代码中的预处理器定义不完全相同——通常使用 USE_*。
 
 
-## Changing PREFIX
+## 更改 PREFIX
 
-To change the target destination pass the `PREFIX` option to the command `make install` (not `make build`). Example usage:
+要更改目标安装路径，请将 `PREFIX` 选项传递给 `make install` 命令（而不是 `make build`）。示例用法：
 
 ```
 $ make build
 $ make -n install PREFIX=/opt/civetweb
 ```
-Note: The `-n` corresponds to the `--dry-run` option (it does not make any changes): You can see where `make install` would install. Example output of the above command:
+注意：`-n` 对应于 `--dry-run` 选项（它不会进行任何更改）：您可以查看 `make install` 将安装的位置。上述命令的示例输出：
 
 ```
 $ make -n install PREFIX=/opt/civetweb
@@ -135,121 +130,110 @@ install -d -m 755 "/opt/civetweb/bin"
 install -m 755 civetweb "/opt/civetweb/bin/"
 ```
 
-If the output looks good: Just remove the `-n` option to actually install the software on your system.
+如果输出看起来不错：只需删除 `-n` 选项即可在系统上实际安装软件。
 
 
-## Setting compile flags
+## 设置编译标志
 
-Compile flags can be set using the *COPT* make option like so.
+可以使用 *COPT* make 选项设置编译标志，例如：
 ```
 make build COPT="-DNDEBUG -DNO_CGI"
 ```
 
-| Compile Flags                | Description                                                         |
+| 编译标志                | 描述                                                         |
 | ---------------------------- | ------------------------------------------------------------------- |
-| `NDEBUG`                     | strip off all debug code                                            |
-| `DEBUG`                      | build debug version (very noisy)                                    |
+| `NDEBUG`                     | 去除所有调试代码                                            |
+| `DEBUG`                      | 构建调试版本（非常冗长）                                    |
 |                              |                                                                     |
-| `NO_ATOMICS`                 | do not use atomic functions, use locks instead                      |
-| `NO_CACHING`                 | disable caching functionality                                       |
-| `NO_CGI`                     | disable CGI support                                                 |
-| `NO_FILES`                   | do not serve files from a directory                                 |
-| `NO_FILESYSTEMS`             | completely disable filesystems usage (requires NO_FILES)            |
-| `NO_NONCE_CHECK`             | disable nonce check for HTTP digest authentication                  |
-| `NO_RESPONSE_BUFFERING`      | send all mg_response_header_* immediately instead of buffering until the mg_response_header_send call |
-| `NO_SSL`                     | disable SSL functionality                                           |
-| `NO_SSL_DL`                  | link against system libssl library                                  |
-| `NO_THREAD_NAME`             | do not set a name for pthread                                       |
+| `NO_ATOMICS`                 | 不使用原子函数，改用锁                                      |
+| `NO_CACHING`                 | 禁用缓存功能                                                 |
+| `NO_CGI`                     | 禁用 CGI 支持                                                 |
+| `NO_FILES`                   | 不从目录提供文件                                             |
+| `NO_FILESYSTEMS`             | 完全禁用文件系统使用（需要 NO_FILES）                        |
+| `NO_NONCE_CHECK`             | 禁用 HTTP 摘要认证的 nonce 检查                              |
+| `NO_RESPONSE_BUFFERING`      | 立即发送所有 mg_response_header_*，而不是缓冲到 mg_response_header_send 调用 |
+| `NO_SSL`                     | 禁用 SSL 功能                                                 |
+| `NO_SSL_DL`                  | 链接系统 libssl 库                                           |
+| `NO_THREAD_NAME`             | 不为 pthread 设置名称                                        |
 |                              |                                                                     |
-| `USE_ALPN`                   | enable Application-Level-Protocol-Negotiation, required for HTTP2   |
-| `USE_DUKTAPE`                | enable server-side JavaScript (using Duktape library)               |
-| `USE_HTTP2`                  | enable HTTP2 support (experimental, not recommended for production) |
-| `USE_IPV6`                   | enable IPv6 support                                                 |
-| `USE_LUA`                    | enable Lua support                                                  |
-| `USE_SERVER_STATS`           | enable server statistics support                                    |
-| `USE_STACK_SIZE`             | define stack size instead of using system default                   |
-| `USE_WEBSOCKET`              | enable websocket support                                            |
-| `USE_X_DOM_SOCKET`           | enable unix domain socket support                                   |
-| `USE_ZLIB`                   | enable on-the-fly compression of files (using zlib)                 |
+| `USE_ALPN`                   | 启用应用层协议协商（ALPN），HTTP2 必需                       |
+| `USE_DUKTAPE`                | 启用服务器端 JavaScript（使用 Duktape 库）                   |
+| `USE_HTTP2`                  | 启用 HTTP2 支持（实验性，不建议用于生产环境）                 |
+| `USE_IPV6`                   | 启用 IPv6 支持                                                |
+| `USE_LUA`                    | 启用 Lua 支持                                                 |
+| `USE_SERVER_STATS`           | 启用服务器统计支持                                            |
+| `USE_STACK_SIZE`             | 定义堆栈大小，而不是使用系统默认值                            |
+| `USE_WEBSOCKET`              | 启用 WebSocket 支持                                           |
+| `USE_X_DOM_SOCKET`           | 启用 Unix 域套接字支持                                        |
+| `USE_ZLIB`                   | 启用文件即时压缩（使用 zlib）                                 |
 |                              |                                                                     |
-| `MG_EXPERIMENTAL_INTERFACES` | include experimental interfaces                                     |
-| `MG_LEGACY_INTERFACE`        | include obsolete interfaces (candidates for deletion)               |
+| `MG_EXPERIMENTAL_INTERFACES` | 包含实验性接口                                                |
+| `MG_LEGACY_INTERFACE`        | 包含过时的接口（可能被删除的候选）                            |
 |                              |                                                                     |
-| `SQLITE_DISABLE_LFS`         | disables large files (Lua only)                                     |
-| `SSL_ALREADY_INITIALIZED`    | do not initialize libcrypto                                         |
-| `OPENSSL_API_1_0`            | Use OpenSSL V1.0.x interface                                        |
-| `OPENSSL_API_1_1`            | Use OpenSSL V1.1.x interface                                        |
-| `OPENSSL_API_3_0`            | Use OpenSSL V3.0.x interface                                        |
-| `USE_GNUTLS`                 | Use GnuTLS (cannot be combined with OPENSSL_API_* or USE_MBEDTLS)   |
-| `USE_MBEDTLS`                | Use MbedTLS (cannot be combined with OPENSSL_API_* or USE_GNUTLS)   |
+| `SQLITE_DISABLE_LFS`         | 禁用大文件支持（仅限 Lua）                                    |
+| `SSL_ALREADY_INITIALIZED`    | 不初始化 libcrypto                                            |
+| `OPENSSL_API_1_0`            | 使用 OpenSSL V1.0.x 接口                                       |
+| `OPENSSL_API_1_1`            | 使用 OpenSSL V1.1.x 接口                                       |
+| `OPENSSL_API_3_0`            | 使用 OpenSSL V3.0.x 接口                                       |
+| `USE_GNUTLS`                 | 使用 GnuTLS（不能与 OPENSSL_API_* 或 USE_MBEDTLS 结合使用）   |
+| `USE_MBEDTLS`                | 使用 MbedTLS（不能与 OPENSSL_API_* 或 USE_GNUTLS 结合使用）   |
 |                              |                                                                     |
-| `BUILD_DATE`                 | define as a string to be used as build id instead of __DATE__       |
+| `BUILD_DATE`                 | 定义字符串以用作构建 ID，而不是使用 __DATE__                 |
 |                              |                                                                     |
 
 
-Note: If `make` is used (with this [Makefile](https://github.com/civetweb/civetweb/blob/master/Makefile)), you should not pass the `USE_<feature>` flags using `COPT`, but use the `WITH_<feature>` syntax above, since additional features may also use additional source code files.
+注意：如果使用 `make`（使用此 [Makefile](https://github.com/civetweb/civetweb/blob/master/Makefile)），您不应使用 `COPT` 传递 `USE_<feature>` 标志，而应使用上面的 `WITH_<feature>` 语法，因为附加功能可能还需要额外的源代码文件。
 
 
-## Cross Compiling
+## 交叉编译
 
-Take total control with *CC*, *COPT* and *TARGET_OS* as make options.
-TARGET_OS is used to determine some compile details as will as code function.
-TARGET_OS values should be be one found in *resources/Makefile.in-os*.
+使用 *CC*、*COPT* 和 *TARGET_OS* 作为 make 选项来完全控制构建。  
+TARGET_OS 用于确定一些编译细节以及代码功能。  
+TARGET_OS 值应为 *resources/Makefile.in-os* 中找到的值之一。
 
 ```
 make CC=arm-none-linux-gnueabi-gcc COPT="-march=armv7-a  -mfpu=vfp -mfloat-abi=softfp" TARGET_OS=FROG
 ```
 
-## Cocoa DMG Packaging (OSX Only)
+## Cocoa DMG 打包（仅限 OSX）
 
-Use the alternate *Makefile.osx* to do the build.  The entire build has
-to be done using *Makefile.osx* because additional compile and link options
-are required.  This Makefile has all the same options as the other one plus
-one additional *package* rule.
+使用替代的 *Makefile.osx* 进行构建。整个构建必须使用 *Makefile.osx*，因为需要额外的编译和链接选项。此 Makefile 具有与另一个 Makefile 相同的选项，外加一个额外的 *package* 规则。
 
 ```
 make -f Makefile.osx package
 ```
 
-Building with Buildroot
+使用 Buildroot 构建
 ---------
 
-[Buildroot](http://buildroot.uclibc.org/) is a tool for creating cross compiled file systems.  Including Civetweb in buildroot is fairly easy.  There is even support for various build options.
+[Buildroot](http://buildroot.uclibc.org/) 是一个用于创建交叉编译文件系统的工具。将 Civetweb 包含在 Buildroot 中非常简单，甚至支持各种构建选项。
 
-1. First, check if it already there.
-  - In buildroot, make menuconfig
+1. 首先，检查是否已经存在。
+   - 在 Buildroot 中，运行 `make menuconfig`。
      - Package Selection for the target --->
      - Networking applications  --->
      - civetweb
-2. If not there, just add it
-  - copy *Config.in* and *civetweb.mk* from Civetweb's *contrib/buildroot/* to Buildroot's *package/civetweb/* directory.
-  - In Buildroot's *package/Config.in, insert the following line in were you will know how to find it in the menu.
-    > ``` source "package/civetweb/Config.in" ```
+2. 如果不存在，只需添加它。
+   - 将 Civetweb 的 *contrib/buildroot/* 中的 *Config.in* 和 *civetweb.mk* 复制到 Buildroot 的 *package/civetweb/* 目录中。
+   - 在 Buildroot 的 *package/Config.in* 中插入以下行，以便在菜单中找到它。
+     > ``` source "package/civetweb/Config.in" ```
 
 
-Building on Android
+在 Android 上构建
 ---------
 
-This is a small guide to help you run civetweb on Android, originally
-tested on the HTC Wildfire.
-Note: You do not need root access to run civetweb on Android.
+这是一个小指南，帮助您在 Android 上运行 civetweb，最初在 HTC Wildfire 上测试。  
+注意：您不需要 root 访问权限即可在 Android 上运行 civetweb。
 
-- Download the source from the Downloads page.
-- Download the Android NDK from [http://developer.android.com/tools/sdk/ndk/index.html](http://developer.android.com/tools/sdk/ndk/index.html)
-- Run `/path-to-ndk/ndk-build -C /path-to-civetweb/resources`
-  That should generate civetweb/lib/armeabi/civetweb
-- Using the adb tool (you need to have Android SDK installed for that),
-  push the generated civetweb binary to `/data/local` folder on device.
-- From adb shell, navigate to `/data/local` and execute `./civetweb`.
-- To test if the server is running fine, visit your web-browser and
-  navigate to `http://127.0.0.1:8080` You should see the `Index of /` page.
+- 从下载页面下载源代码。
+- 从 [http://developer.android.com/tools/sdk/ndk/index.html](http://developer.android.com/tools/sdk/ndk/index.html) 下载 Android NDK。
+- 运行 `/path-to-ndk/ndk-build -C /path-to-civetweb/resources`  
+  这应该会生成 civetweb/lib/armeabi/civetweb。
+- 使用 adb 工具（您需要安装 Android SDK），将生成的 civetweb 二进制文件推送到设备上的 `/data/local` 文件夹。
+- 在 adb shell 中，导航到 `/data/local` 并执行 `./civetweb`。
+- 要测试服务器是否正常运行，请在 Web 浏览器中访问 `http://127.0.0.1:8080`，您应该会看到 `Index of /` 页面。
 
 
-Notes:
+注意事项：
 
-- `jni` stands for Java Native Interface. Read up on Android NDK if you want
-  to know how to interact with the native C functions of civetweb in Android
-  Java applications.
-
-
-
+- `jni` 代表 Java 本地接口。如果您想了解如何在 Android Java 应用程序中与 civetweb 的本地 C 函数交互，请阅读有关 Android NDK 的内容。

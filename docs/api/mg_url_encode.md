@@ -1,25 +1,25 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_url_encode( src, dst, des_len );`
+### `mg_url_encode( src, dst, dst_len );`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`src`**|`const char *`|Input string to encode|
-|**`dst`**|`char *`|Destination buffer to store the encoded result|
-|**`dst_len`**|`size_t`|Length of the destination buffer including the terminating NUL|
+|**`src`**|`const char *`|需要编码的输入字符串|
+|**`dst`**|`char *`|用于存储编码结果的目标缓冲区|
+|**`dst_len`**|`size_t`|目标缓冲区的长度（包括终止符 `NUL`）|
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|The number of characters written in the destination buffer|
+|`int`|写入目标缓冲区的字符数|
 
-### Description
+### 描述
 
-The function `mg_url_encode()` encodes a in input buffer. Both normal URIs and form URIs can be encoded. In the latter case the space character is converted to a `+` as defined in [RFC 1866](http://ftp.ics.uci.edu/pub/ietf/html/rfc1866.txt) in section 8.2.1.
+函数 `mg_url_encode()` 用于对输入缓冲区中的字符串进行编码。它可以编码普通 URI 和表单 URI。对于表单 URI，空格字符会按照 [RFC 1866](http://ftp.ics.uci.edu/pub/ietf/html/rfc1866.txt) 第 8.2.1 节的定义转换为 `+`。
 
-### See Also
+### 相关函数
 
 * [`mg_url_decode();`](mg_url_decode.md)

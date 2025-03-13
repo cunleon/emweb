@@ -1,22 +1,21 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
 ### `struct mg_client_cert;`
 
-### Fields
+### 字段
 
-| Field | Type | Description |
+| 字段 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`subject`**|`const char *`| 证书的使用者 |
-|**`issuer`**|`const char *`| 证书的颁发者 |
-|**`serial`**|`const char *`| 证书的序列号 |
-|**`finger`**|`const char *`| 证书的指纹 |
+| **`subject`** | `const char *` | 证书的主题（Subject） |
+| **`issuer`** | `const char *` | 证书的颁发者（Issuer） |
+| **`serial`** | `const char *` | 证书的序列号（Serial Number） |
+| **`finger`** | `const char *` | 证书的指纹（Fingerprint） |
 
+### 说明
 
-### Description
+`struct mg_client_cert` 是一个子结构体，用于在 [`mg_request_info`](mg_request_info.md) 结构体中存储客户端提供的可选证书信息。当客户端在建立连接时提供证书时，此结构体用于存储证书的相关信息。
 
-结构 'client_cert' 用作 ['mg_request_info']（mg_request_info.md） 结构中的子结构，以存储可选客户端提供的证书的信息。
-
-### See Also
+### 参考
 
 * [`struct mg_request_info;`](mg_request_info.md)
 * [`mg_get_request_info();`](mg_get_request_info.md)

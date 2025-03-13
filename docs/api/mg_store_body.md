@@ -1,24 +1,24 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_store_body( conn, path );`
+### `mg_store_body(conn, path);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`struct mg_connection *`|connection on which to read the data|
-|**`path`**|`const char *`|file to store the request body|
+| **`conn`** | `struct mg_connection *` | 用于读取数据的连接 |
+| **`path`** | `const char *` | 用于存储请求体的文件路径 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`long long`|Number of bytes written to the file, or an error code|
+| `long long` | 写入文件的字节数，或错误代码（负值） |
 
-### Description
+### 描述
 
-The function `mg_store_body()` stores the body of an incoming request to a data file. The function returns the number of bytes stored in the file, or a negative value to indicate an error.
+`mg_store_body()` 函数将传入请求的正文存储到一个数据文件中。函数返回写入文件的字节数，或返回负值以表示错误。
 
-### See Also
+### 参见
 
-* [`mg_read();`](mg_read.md)
+* [mg_read();](mg_read.md)

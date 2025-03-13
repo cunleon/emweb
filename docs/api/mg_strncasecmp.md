@@ -1,25 +1,25 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_strncasecmp( s1, s2, len );`
+## `mg_strncasecmp(s1, s2, len);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`s1`**|`const char *`|First string in the comparison|
-|**`s2`**|`const char *`|Second string in the comparison|
-|**`len`**|`size_t`|The maximum number of characters to compare|
+| **`s1`** | `const char *` | 比较中的第一个字符串 |
+| **`s2`** | `const char *` | 比较中的第二个字符串 |
+| **`len`** | `size_t` | 要比较的最大字符数 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|The result of the comparison|
+| `int` | 比较的结果 |
 
-### Description
+### 说明
 
-The function `mg_strncasecmp()` is a helper function to compare two strings. The comparison is case insensitive and only a limited number of characters are compared. This limit is provided as third parameter in the function call. The return value is **0** if both strings are equal, less then zero if the first string is less than the second in a lexical comparison, and greater than zero if the first string is greater than the second.
+`mg_strncasecmp()` 是一个用于比较两个字符串的辅助函数。比较是不区分大小写的，并且只比较有限数量的字符。这个限制作为函数调用的第三个参数提供。如果两个字符串相等，返回值为 **0**；如果第一个字符串在字典序中小于第二个字符串，返回值小于零；如果第一个字符串大于第二个字符串，返回值大于零。
 
-### See Also
+### 参见
 
 * [`mg_strcasecmp();`](mg_strcasecmp.md)

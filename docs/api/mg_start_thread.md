@@ -1,26 +1,28 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_start_thread( func, cbdata );`
+### `mg_start_thread(func, cbdata);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`func`**|`mg_thread_func_t`|Function to start as a separate thread|
-|**`cbdata`**|`void *`|User defined data to be passed to the thread as parameter|
+| **`func`** | `mg_thread_func_t` | 要作为独立线程运行的函数。 |
+| **`cbdata`** | `void *` | 要传递给线程函数的用户自定义数据。 |
 
-`void mg_thread_func_t( void *cbdata );`
+```c
+void mg_thread_func_t(void *cbdata);
+```
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|Success or error code|
+| `int` | 成功时返回 **0**，发生错误时返回错误代码。 |
 
-### Description
+### 描述
 
-The function `mg_start_thread()` is a convenience function to create a detached thread. The function returns **0** when successful and another value if an error occurred. A pointer to user supplied data can be passed which is then passed further on to the thread function as parameter.
+`mg_start_thread()` 函数是一个便捷函数，用于创建一个分离的线程。它允许指定的函数（`func`）在独立的线程中并发执行。如果线程成功创建，函数返回 **0**；如果发生错误，则返回非零值。可以传递指向用户自定义数据（`cbdata`）的指针，该指针会被进一步传递给线程函数作为参数，从而允许线程访问自定义数据。
 
-### See Also
+### 参见
 
-* [`mg_start();`](mg_start.md)
+* [mg_start();](mg_start.md)

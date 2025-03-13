@@ -18,9 +18,8 @@
 
 ### Description
 
-The function `mg_connect_client_secure()` creates a secure connection with a server. The information about the connection and server is passed in a structure and an error message may be returned in a local buffer. The function returns a pointer to a `struct mg_connection` structure when successful and NULL otherwise.
-
-Please note that IPv6 communication is supported by Civetweb, but only if the use of IPv6 was enabled at compile time. The check while running a program if IPv6 communication is possible you can call [`mg_check_feature()`](mg_check_feature.md) with the `USE_IPV6` parameter to check if IPv6 communications can be used.
+mg_connect_client_secure() 函数用于与服务器建立安全连接。连接和服务器的相关信息通过一个结构体传递，错误信息可能会返回到一个本地缓冲区。函数在成功时返回指向 struct mg_connection 结构体的指针，否则返回 NULL。
+请注意，Civetweb 支持 IPv6 通信，但这仅在编译时启用了 IPv6 功能时才有效。在运行程序时，可以通过调用函数 mg_check_feature() 并传入 USE_IPV6 参数来检查是否支持 IPv6 通信。
 
 ### See Also
 

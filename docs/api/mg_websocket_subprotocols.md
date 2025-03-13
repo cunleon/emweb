@@ -1,18 +1,18 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
 ### `struct mg_websocket_subprotocols;`
 
-### Fields
+### 字段
 
-| Field | Type | Description |
+| 字段 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`nb_subprotocols`**|`int`| Number of websocket sub-protocol names following (>=0). |
-|**`subprotocols`**|`const char **`| Array of websocket sub-protocol names (nb_subprotocols elements). |
+|**`nb_subprotocols`**|`int`| 后续支持的 WebSocket 子协议数量（>=0）。 |
+|**`subprotocols`**|`const char **`| WebSocket 子协议名称数组（包含 `nb_subprotocols` 个元素）。 |
 
-### Description
+### 描述
 
-The structure `mg_websocket_subprotocols` is used to specify websocket sub-protocols supported by a websocket handler function.
+结构体 `mg_websocket_subprotocols` 用于指定 WebSocket 处理函数支持的 WebSocket 子协议。
 
-### See Also
+### 相关函数
 
 * [`mg_set_websocket_handler_with_subprotocols();`](mg_set_websocket_handler_with_subprotocols.md)

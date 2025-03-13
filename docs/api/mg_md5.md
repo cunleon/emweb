@@ -1,24 +1,24 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_md5( buf, ... );`
+### `mg_md5(buf, ...);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`buf`**|`char[33]`|Storage buffer for the calculated MD5 sum|
-|**`...`**|`char *, ...`|NULL terminated list of pointers to strings with data|
+| **`buf`** | `char[33]` | 用于存储计算出的 MD5 校验和的缓冲区 |
+| **`...`** | `char *, ...` | 以 NULL 结尾的字符串指针列表，包含要计算的数据 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`char *`|Pointer to the resulting MD5 string|
+| `char *` | 指向结果 MD5 字符串的指针 |
 
-### Description
+### 说明
 
-The function `mg_md5()` calculates the MD5 checksum of a NULL terminated list of NUL terminated ASCII strings. The MD5 checksum is returned in human readable format as an MD5 string in a caller supplied buffer.
+`mg_md5()` 函数用于计算一个以 NULL 结尾的 NUL 终止 ASCII 字符串列表的 MD5 校验和。计算出的 MD5 校验和以可读格式存储在调用方提供的缓冲区中。
 
-The function returns a pointer to the supplied result buffer.
+函数返回指向提供的结果缓冲区的指针。
 
-### See Also
+### 参考

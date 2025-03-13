@@ -1,29 +1,29 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
 ### `mg_websocket_client_write( conn, opcode, data, data_len );`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`struct mg_connection *`|Connection on which to send data|
-|**`opcode`**|`int`|Opcode|
-|**`data const`**|`char *`|The data to be written|
-|**`data_len`**|`size_t`|Length of the data buffer|
+|**`conn`**|`struct mg_connection *`|用于发送数据的连接|
+|**`opcode`**|`int`|操作码|
+|**`data`**|`const char *`|要写入的数据|
+|**`data_len`**|`size_t`|数据缓冲区的长度|
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|Number of bytes written or an error code|
+|`int`|写入的字节数或错误代码|
 
-### Description
+### 描述
 
-The function `mg_websocket_client_write()` sends data to a websocket server wrapped in a masked websocket frame. The function issues calls to [`mg_lock_connection()`](mg_lock_connection.md) and [`mg_unlock_connection()`](mg_unlock_connection.md) to ensure that the transmission is not interrupted. Interruption can happen the the application is proactively communicating and responding to a request simultaneously. This function is available only, if Civetweb is compiled with the option `-DUSE_WEBSOCKET`.
+函数 `mg_websocket_client_write()` 用于将数据发送到 WebSocket 服务器，数据会被封装在一个掩码化的 WebSocket 帧中。该函数会调用 [`mg_lock_connection()`](mg_lock_connection.md) 和 [`mg_unlock_connection()`](mg_unlock_connection.md) 来确保传输不会被中断。中断可能发生在应用程序同时主动通信和响应请求时。此函数仅在 Civetweb 编译时启用了 `-DUSE_WEBSOCKET` 选项时可用。
 
-The return value is the number of bytes written on success, **0** when the connection has been closed and **-1** if an error occurred.
+返回值表示成功时写入的字节数，**0** 表示连接已关闭，**-1** 表示发生错误。
 
-### See Also
+### 相关函数
 
 * [`mg_lock_connection();`](mg_lock_connection.md)
 * [`mg_printf();`](mg_printf.md)

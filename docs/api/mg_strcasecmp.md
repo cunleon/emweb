@@ -1,24 +1,24 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
 ### `mg_strcasecmp( s1, s2 );`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`s1`**|`const char *`|First string to compare|
-|**`s2`**|`const char *`|Second string to compare|
+|**`s1`**|`const char *`|要比较的第一个字符串|
+|**`s2`**|`const char *`|要比较的第二个字符串|
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|Integer value with the result of the comparison|
+|`int`|比较结果的整数值|
 
-### Description
+### 描述
 
-The function `mg_strcasecmp()` is a helper function to compare two strings. The comparison is case insensitive. The return value is **0** if both strings are equal, less then zero if the first string is less than the second in a lexical comparison, and greater than zero if the first string is greater than the second.
+函数 `mg_strcasecmp()` 是一个辅助函数，用于比较两个字符串。比较是**不区分大小写**的。如果两个字符串相等，返回值为 **0**；如果第一个字符串在字典顺序上小于第二个字符串，则返回值小于零；如果第一个字符串在字典顺序上大于第二个字符串，则返回值大于零。
 
-### See Also
+### 相关函数
 
 * [`mg_strncasecmp();`](mg_strncasecmp.md)

@@ -1,31 +1,26 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_thread_pointer( conn );`
+### `mg_get_thread_pointer(conn);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`const struct mg_connection *`|The connection, for which the context has to be returned, or NULL|
+| **`conn`** | `const struct mg_connection *` | 需要返回线程上下文的连接，或为 NULL |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`void *`|A pointer to the context of the given connection|
+| `void *` | 指向给定连接的线程上下文的指针 |
 
-### Description
+### 说明
 
-The function `mg_get_thread_pointer()` returns the user defined pointer associated with the thread.
-This pointer is set as return value of the `mg_init_thread` callback (see [`struct mg_callbacks`](mg_callbacks.md)).
+`mg_get_thread_pointer()` 函数返回与线程关联的用户定义指针。此指针是在 `mg_init_thread` 回调函数中设置的（参见 [`struct mg_callbacks`](mg_callbacks.md)）。
 
-The `conn` parameter can be NULL - in this case, the user defined pointer is taken from the thread local storage.
-For callbacks executed by server worker threads, `conn` can be the connection handle - in this case,
-the user defined pointer is taken from the connection handle.
-In both cases, the result will be the same pointer. Reading the pointer from the connection handle might be
-faster on some systems.
+`conn` 参数可以为 NULL——在这种情况下，用户定义的指针将从线程本地存储中获取。对于由服务器工作线程执行的回调，`conn` 可以是连接句柄——在这种情况下，用户定义的指针将从连接句柄中获取。在这两种情况下，返回的指针是相同的。在某些系统上，从连接句柄读取指针可能更快。
 
-### See Also
+### 参考
 
 * [`struct mg_callbacks`](mg_callbacks.md)
 * [`mg_get_user_data();`](mg_get_user_data.md)

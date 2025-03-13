@@ -1,18 +1,18 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
 ### `struct mg_header;`
 
-### Fields
+### 字段
 
-| Field | Type | Description |
+| 字段 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`name`**|`const char *`| The name of the client request header |
-|**`value`**|`const char *`| The value of the client request header |
+| **`name`** | `const char *` | 客户端请求头的名称 |
+| **`value`** | `const char *` | 客户端请求头的值 |
 
-### Description
+### 说明
 
-The structure `mg_header` is used as a sub-structure in the [`struct mg_request_info;`](mg_request_info.md) structure to store the name and value of one HTTP request header as sent by the client.
+`struct mg_header` 是一个子结构体，用于在 [`struct mg_request_info;`](mg_request_info.md) 结构体中存储客户端发送的 HTTP 请求头的名称和值。
 
-### See Also
+### 参考
 
 * [`struct mg_request_info;`](mg_request_info.md)

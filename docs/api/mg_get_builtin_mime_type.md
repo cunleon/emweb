@@ -1,24 +1,24 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_builtin_mime_type( file_name );`
+### `mg_get_builtin_mime_type(file_name);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`file_name`**|`const char *`|The name of the file for which the MIME type has to be determined|
+| **`file_name`** | `const char *` | 需要确定 MIME 类型的文件名称 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`const char *`|A text string describing the MIME type|
+| `const char *` | 描述 MIME 类型的文本字符串 |
 
-### Description
+### 说明
 
-The function `mg_get_builtin_mime_type()` tries to determine the MIME type of a given file. If the MIME type cannot be determined, the value `text/plain` is returned. Please note that this function does not an intelligent check of the file contents. The MIME type is solely determined based on the file name extension.
+`mg_get_builtin_mime_type()` 函数尝试确定给定文件的 MIME 类型。如果无法确定 MIME 类型，则返回值为 `text/plain`。请注意，此函数不会智能检查文件内容，MIME 类型仅根据文件扩展名确定。
 
-### See Also
+### 参考
 
 * [`mg_send_mime_file();`](mg_send_mime_file.md)
 * [`mg_send_mime_file2();`](mg_send_mime_file2.md)

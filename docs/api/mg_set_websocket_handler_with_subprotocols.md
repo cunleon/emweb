@@ -1,36 +1,34 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_set_websocket_handler_with_subprotocols( ctx, uri, subprotocols, connect_handler, ready_handler, data_handler, close_handler, cbdata );`
+### `mg_set_websocket_handler_with_subprotocols(ctx, uri, subprotocols, connect_handler, ready_handler, data_handler, close_handler, cbdata);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`ctx`**|`mg_context *`|The context in which to add the handlers|
-|**`uri`**|`const char *`|The URI for which the handlers should be activated|
-|**`subprotocols`**|`struct mg_websocket_subprotocols *`|A list of supported sub-protocols|
-|**`connect_handler`**|`mg_websocket_connect_handler`|Handler called when a connect is signaled|
-|**`ready_handler`**|`mg_websocket_ready_handler`|Handler called when the connection is ready|
-|**`data_handler`**|`mg_websocket_data_handler`|Handler called when data is received|
-|**`close_handler`**|`mg_websocket_close_handler`|Handler called when the connection closes|
-|**`cbdata`**|`void *`|User defined data|
+| **`ctx`** | `mg_context *` | 要添加处理器的上下文 |
+| **`uri`** | `const char *` | 需要激活处理器的 URI |
+| **`subprotocols`** | `struct mg_websocket_subprotocols *` | 支持的子协议列表 |
+| **`connect_handler`** | `mg_websocket_connect_handler` | 在连接建立时被调用的处理器 |
+| **`ready_handler`** | `mg_websocket_ready_handler` | 在连接准备就绪时被调用的处理器 |
+| **`data_handler`** | `mg_websocket_data_handler` | 在接收到数据时被调用的处理器 |
+| **`close_handler`** | `mg_websocket_close_handler` | 在连接关闭时被调用的处理器 |
+| **`cbdata`** | `void *` | 用户自定义数据 |
 
-`int mg_websocket_connect_handler( const struct mg_connection *conn, void *cbdata );`
-`int mg_websocket_ready_handler( struct mg_connection *conn, void *cbdata );`
-`int mg_websocket_data_handler( struct mg_connection *conn, int opcode, char * buf, size_t buf_len, void *cbdata );`
-`int mg_websocket_close_handler( const struct mg_connection *conn,  void *cbdata );`
+`int mg_websocket_connect_handler(const struct mg_connection *conn, void *cbdata);`  
+`int mg_websocket_ready_handler(struct mg_connection *conn, void *cbdata);`  
+`int mg_websocket_data_handler(struct mg_connection *conn, int opcode, char *buf, size_t buf_len, void *cbdata);`  
+`int mg_websocket_close_handler(const struct mg_connection *conn, void *cbdata);`
 
-### Return Value
+### 返回值
 
-*none*
+*无*
 
-### Description
+### 描述
 
-The function `mg_set_websocket_handler_with_subprotocols()` connects callback functions to a websocket URI, just like [`mg_set_websocket_handler();`](mg_set_websocket_handler.md). 
-In addition, it allows to specify websocket sub-protocols.
-The callback functions are called when a state change is detected on the URI like an incoming connection or data received from a remote peer.
+`mg_set_websocket_handler_with_subprotocols()` 函数将回调函数绑定到 WebSocket URI，类似于 [`mg_set_websocket_handler();`](mg_set_websocket_handler.md)。此外，它还允许指定 WebSocket 子协议。当 URI 上检测到状态变化（例如，有新的连接或从远端对等方接收到数据）时，会调用这些回调函数。
 
-### See Also
+### 参见
 
 * [`struct mg_websocket_subprotocols;`](api/mg_websocket_subprotocols.md)
 * [`mg_set_websocket_handler();`](mg_set_websocket_handler.md)

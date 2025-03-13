@@ -1,22 +1,22 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_unlock_context( ctx );`
+### `mg_unlock_context(ctx);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`ctx`**|`struct mg_context *`|The context to remove the lock from|
+| **`ctx`** | `struct mg_context *` | 要解除锁定的上下文 |
 
-### Return Value
+### 返回值
 
-*none*
+*无*
 
-### Description
+### 说明
 
-The function `mg_unlock_contect()` removes a lock put previously on a context with a call to [`mg_lock_context()`](mg_lock_context.md). Locking a context may be necessary when accessing shared resources.
+`mg_unlock_context()` 函数用于解除之前通过调用 [`mg_lock_context()`](mg_lock_context.md) 设置的上下文锁定。当访问共享资源时，锁定上下文可能是必要的。
 
-### See Also
+### 参见
 
 * [`mg_lock_connection();`](mg_lock_connection.md)
 * [`mg_lock_context();`](mg_lock_context.md)

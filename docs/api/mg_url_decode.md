@@ -1,27 +1,27 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_url_decode( src, src_len, dst, dst_len, is_form_url_encoded );`
+### `mg_url_decode(src, src_len, dst, dst_len, is_form_url_encoded);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`src`**|`const char *`|Source data to convert|
-|**`src_len`**|`int`|Length of the source buffer|
-|**`dst`**|`char *`|Destination buffer to store the result|
-|**`dst_len`**|`int`|Length of the destination buffer|
-|**`is_form_url_encoded`**|`int`|Not equal zero when form decoding must be used|
+| **`src`** | `const char *` | 待转换的源数据 |
+| **`src_len`** | `int` | 源缓冲区的长度 |
+| **`dst`** | `char *` | 目标缓冲区，用于存储解码结果 |
+| **`dst_len`** | `int` | 目标缓冲区的长度 |
+| **`is_form_url_encoded`** | `int` | 当需要进行表单解码时，该值不为零 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|The number of bytes stored in the destination buffer, or **-1** if the buffer doesn't exist or is too small|
+| `int` | 解码后存储在目标缓冲区中的字节数，如果目标缓冲区不存在或过小则返回 **-1** |
 
-### Description
+### 说明
 
-The function `mg_url_decode()` Decodes a in input buffer. Both normal URIs and form URIs can be decoded. In the latter case the space character is converted to a `+` as defined in [RFC 1866](http://ftp.ics.uci.edu/pub/ietf/html/rfc1866.txt) in section 8.2.1.
+函数 `mg_url_decode()` 对输入缓冲区进行解码。它既可以解码普通 URI，也可以解码表单 URI。在后一种情况下，空格字符会被转换为 `+`，这是根据 [RFC 1866](http://ftp.ics.uci.edu/pub/ietf/html/rfc1866.txt) 第 8.2.1 节的定义实现的。
 
-### See Also
+### 参见
 
 * [`mg_url_encode();`](mg_url_encode.md)

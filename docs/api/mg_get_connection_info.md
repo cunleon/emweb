@@ -1,40 +1,31 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_connection_info( ctx, idx, buffer, buflen );`
+### `mg_get_connection_info(ctx, idx, buffer, buflen);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`ctx`**|`struct mg_context *`|The server context handle|
-|**`idx`**|`int`|Connection index within the context|
-|**`buffer**|`char *`|A string buffer to store the information|
-|**`buflen**|`int`|Size of the string buffer (including space for a terminating 0)|
+| **`ctx`** | `struct mg_context *` | 服务器上下文句柄。 |
+| **`idx`** | `int` | 上下文中的连接索引。 |
+| **`buffer`** | `char *` | 用于存储信息的字符串缓冲区。 |
+| **`buflen`** | `int` | 字符串缓冲区的大小（包括终止符 0 的空间）。 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|Available context information in bytes (excluding the terminating 0)|
+| `int` | 可用上下文信息的字节数（不包括终止符 0）。 |
 
-### Description
+### 说明
 
-The function `mg_get_connection_info()` returns statistics information collected for 
-a server connection index.  This may be empty if the server has not been built with 
-statistics support (`#define USE_SERVER_STATS`). 
-If data is available, the returned string is in JSON format. The exact content may
-vary, depending on the connection state and server version.
+`mg_get_connection_info()` 函数返回服务器连接索引处收集的统计信息。如果服务器在编译时未启用统计支持（`#define USE_SERVER_STATS`），则可能返回空值。如果存在数据，返回的字符串将以 JSON 格式提供。具体的内容可能会根据连接状态和服务器版本而有所不同。
 
-### Note
+### 注意
 
-This is an experimental interface and may be changed, replaced
-or even removed in the future. Currently the index `idx` must be
-between `0` and `num_threads-1`. The thread is not locked for
-performance reasons, so the information may be inconsistent 
-in rare cases.
+这是一个实验性接口，未来可能会被修改、替换甚至移除。目前，索引 `idx` 必须在 `0` 到 `num_threads-1` 之间。为了性能原因，线程不会被锁定，因此在极少数情况下，信息可能会不一致。
 
-### See Also
+### 参考
 
 * [`mg_get_system_info();`](mg_get_system_info.md)
 * [`mg_get_context_info();`](mg_get_context_info.md)
-

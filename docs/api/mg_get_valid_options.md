@@ -1,22 +1,22 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
 ### `mg_get_valid_options();`
 
-### Parameters
+### 参数
 
-*none*
+*无*
 
-### Return Value
+### 返回值
 
-| Type | Description | 
+| 类型 | 描述 |
 | :--- | :--- |
-|`const struct mg_option *`|An array with all valid configuration options|
+| `const struct mg_option *` | 一个包含所有有效配置选项的数组 |
 
-### Description
+### 说明
 
-The function `mg_get_valid_options()` returns an array with all valid configuration options of Civetweb. Each element in the array is a structure with three fields which represent the name of the option, the value of the option and the type of the value. The array is terminated with an element for which the name is `NULL`. See for more details about this structure the documentation of [`struct mg_option`](mg_option.md).
+`mg_get_valid_options()` 函数返回一个数组，其中包含 Civetweb 的所有有效配置选项。数组中的每个元素都是一个包含三个字段的结构体，分别表示选项的名称、选项的值以及值的类型。数组以名称为 `NULL` 的元素作为终止标志。关于该结构体的更多详细信息，请参阅 [`struct mg_option`](mg_option.md) 的文档。
 
-### See Also
+### 参考
 
 * [`struct mg_option;`](mg_option.md)
 * [`mg_start();`](mg_start.md)

@@ -1,23 +1,23 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_user_connection_data( conn );`
+### `mg_get_user_connection_data(conn);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`const struct mg_connection *`|The connection for which to return the user data|
+| **`conn`** | `const struct mg_connection *` | 需要返回用户数据的连接 |
 
-### Return Value
+### 返回值
 
-| Type | Description | 
+| 类型 | 描述 |
 | :--- | :--- |
-|`void *`|A pointer to the user data, or NULL if no user data was registered with the connection|
+| `void *` | 指向用户数据的指针，如果没有为连接注册用户数据，则返回 NULL |
 
-### Description
+### 说明
 
-The function `mg_get_user_connection_data()` returns the user data associated with a connection. This user data is represented with a pointer which has been previously registered with a call to [`mg_set_user_connection_data();`](mg_set_user_connection_data.md). With this function it is possible to pass state information between callback functions referring to a specific connection.
+`mg_get_user_connection_data()` 函数返回与连接关联的用户数据。用户数据是一个指针，之前通过调用 [`mg_set_user_connection_data();`](mg_set_user_connection_data.md) 注册到连接中。通过此函数，可以在引用特定连接的不同回调函数之间传递状态信息。
 
-### See Also
+### 参考
 
 * [`mg_set_user_connection_data();`](mg_set_user_connection_data.md)

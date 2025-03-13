@@ -1,24 +1,24 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_handle_form_request( conn, fdh );`
+### `mg_handle_form_request(conn, fdh);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`struct mg_connection *`|The connection on which form data must be processed|
-|**`fdh`**|`struct mg_form_data_handler`|Structure with callback functions to do the heavy work|
+| **`conn`** | `struct mg_connection *` | 需要处理表单数据的连接 |
+| **`fdh`** | `struct mg_form_data_handler` | 包含用于处理表单数据的回调函数的结构体 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|The number of fields processed, or an error code|
+| `int` | 处理的字段数量，或错误代码 |
 
-### Description
+### 说明
 
-The function `mg_handle_form_request()` processes form data on a connection. The function uses callback functions for the heavy lifting which are passed to the function as fields in a [`struct mg_form_data_handler`](mg_form_data_handler.md) structure. The number of processed fields is returned by the function, or a negative value when an error occurred. I nthe situation where some fields are processed successfully (for example file downloads) and an error occurs later in the form processing, the function still returns a negative value. It is the responsibility of the calling party to do the necessary cleanup. The calling party should also do the cleanup of any files which are created, but not required anymore later.
+`mg_handle_form_request()` 函数用于在连接上处理表单数据。该函数通过传递的 `struct mg_form_data_handler` 结构体中的回调函数来完成实际的处理工作。函数返回处理的字段数量，如果发生错误则返回负值。即使某些字段已成功处理（例如文件下载），但在后续表单处理中发生错误时，函数仍会返回负值。调用方有责任进行必要的清理工作，包括删除不再需要的文件。
 
-### See Also
+### 参考
 
 * [`struct mg_form_data_handler;`](mg_form_data_handler.md)

@@ -1,29 +1,29 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_response( conn, ebuf, ebuf_len, timeout );`
+### `mg_get_response(conn, ebuf, ebuf_len, timeout);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`struct mg_connection *`|The connection to listen on|
-|**`ebuf`**|`char *`|Buffer to store an error message|
-|**`ebuf_len`**|`size_t`|Size of the error message buffer including the terminating NUL|
-|**`timeout`**|`int`|Time to wait for a response in milliseconds|
+| **`conn`** | `struct mg_connection *` | 用于监听响应的连接 |
+| **`ebuf`** | `char *` | 用于存储错误消息的缓冲区 |
+| **`ebuf_len`** | `size_t` | 错误消息缓冲区的大小，包括终止符 NUL |
+| **`timeout`** | `int` | 等待响应的超时时间（以毫秒为单位） |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|Success value of the wait|
+| `int` | 等待操作的成功状态值 |
 
-### Description
+### 说明
 
-The function `mg_get_reponse()` wait for a response from a remote server. A return value equal or greater than zero is an indication for success, a negative value us used to signal an error condition. A timeout can be specified which lets the function return after a specified number of milliseconds, even if no data is received from the remote party. If the timeout value is negative, the function will not return until data has been read or an unrecoverable error occurs.
+`mg_get_response()` 函数用于等待来自远程服务器的响应。返回值大于或等于零表示成功，负值表示发生错误。可以指定一个超时时间，使函数在指定的毫秒数后返回，即使未从远程方接收到数据。如果超时值为负数，函数将一直等待，直到读取到数据或发生不可恢复的错误。
 
-Error messages are stored in a caller supplied error message buffer.
+错误消息将存储在调用方提供的错误消息缓冲区中。
 
-### See Also
+### 参考
 
 * [`mg_connect_client();`](mg_connect_client.md)
 * [`mg_connect_client_secure();`](mg_connect_client_secure.md)

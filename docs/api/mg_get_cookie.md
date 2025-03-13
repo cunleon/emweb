@@ -1,29 +1,29 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_cookie( cookie, var_name, buf, buf_len );`
+### `mg_get_cookie(cookie, var_name, buf, buf_len);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`cookie`**|`const char *`|The unparsed cookie header|
-|**`var_name`**|`const char *`|The cookie name|
-|**`buf`**|`char *`|The buffer where to store the contents of the cookie|
-|**`buf_len`**|`size_t`|The length of the cookie buffer, including the terminating NUL|
+| **`cookie`** | `const char *` | 未解析的 Cookie 头 |
+| **`var_name`** | `const char *` | Cookie 的名称 |
+| **`buf`** | `char *` | 用于存储 Cookie 内容的缓冲区 |
+| **`buf_len`** | `size_t` | Cookie 缓冲区的长度，包括终止符 NUL |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`int`|The length of the cookie or an error code|
+| `int` | Cookie 的长度或错误代码 |
 
-### Description
+### 说明
 
-The function `mg_get_cookie()` tries to fetch the value of a certain cookie variable. The contents will either be stored in an application provided buffer, or an error code will be returned. The destination buffer is guaranteed to be NUL terminated if the pointer of the buffer is not a NULL pointer and the size of the buffer is at least one byte.
+`mg_get_cookie()` 函数尝试获取某个 Cookie 变量的值。如果成功，内容将存储在应用程序提供的缓冲区中；如果失败，则返回错误代码。如果缓冲区指针不是 NULL 指针且缓冲区大小至少为一个字节，则目标缓冲区将保证以 NUL 终止。
 
-If the function succeeds, the return value of the function is the length in bytes of the cookie. The value **`-1`** is returned if the requested cookie could not be found and **`-2`** if the destination buffer is represented by a NULL pointer, is zero length or too short to store the whole cookie.
+如果函数成功，返回值将是 Cookie 的长度（以字节为单位）。如果请求的 Cookie 未找到，返回值为 **`-1`**；如果目标缓冲区是 NULL 指针、长度为零或不足以存储整个 Cookie，则返回 **`-2`**。
 
-### See Also
+### 参考
 
 * [`mg_get_var();`](mg_get_var.md)
 * [`mg_get_var2();`](mg_get_var2.md)

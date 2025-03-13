@@ -1,22 +1,22 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_header( conn, name );`
+### `mg_get_header(conn, name);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`conn`**|`struct mg_connection *`| A pointer referencing the connection |
-|**`name`**|`const char *`| The name of the request header |
+| **`conn`** | `struct mg_connection *` | 指向连接的指针 |
+| **`name`** | `const char *` | 请求头的名称 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`const char *`| A pointer to the value of the request header, or NULL of no matching header count be found |
+| `const char *` | 指向请求头值的指针，如果没有找到匹配的头，则返回 NULL |
 
-### Description
+### 说明
 
-HTTP and HTTPS clients can send request headers to the server to provide details about the communication. These request headers can for example specify the preferred language in which the server should respond and the supported compression algorithms. The function `mg_get_header()` can be called to return the contents of a specific request header. The function will return a pointer to the value text of the header when successful, and NULL of no matching request header from the client could be found.
+HTTP 和 HTTPS 客户端可以通过请求头向服务器发送信息，以提供有关通信的详细内容。例如，请求头可以指定服务器响应的首选语言或支持的压缩算法。`mg_get_header()` 函数可用于返回特定请求头的内容。如果成功，函数将返回指向头值文本的指针；如果未找到匹配的客户端请求头，则返回 NULL。
 
-### See Also
+### 参考

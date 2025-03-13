@@ -1,23 +1,23 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_get_user_data( ctx );`
+### `mg_get_user_data(ctx);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`ctx`**|`const struct mg_context *`|The context for which the user data is requested|
+| **`ctx`** | `const struct mg_context *` | 请求用户数据的 Civetweb 上下文 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`void *`||
+| `void *` | 指向用户数据的指针 |
 
-### Description
+### 说明
 
-The function `mg_get_user_data()` returns the user data associated with a Civetweb context. This is a pointer value which has previously been used in the call to [`mg_start()`](mg_start.md) to initialize the server context.
+`mg_get_user_data()` 函数返回与 Civetweb 上下文关联的用户数据。这是一个指针值，之前在调用 [`mg_start()`](mg_start.md) 初始化服务器上下文时被传递。
 
-### See Also
+### 参考
 
 * [`mg_start();`](mg_start.md)

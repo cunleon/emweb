@@ -1,50 +1,46 @@
-# Civetweb API Reference
+# Civetweb API 参考
 
-### `mg_init_library( feature );`
+### `mg_init_library(feature);`
 
-### Parameters
+### 参数
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 | :--- | :--- | :--- |
-|**`feature`**|`unsigned`| A bitmask indicating the features to be ininialized |
+| **`feature`** | `unsigned` | 一个表示要初始化的功能的位掩码 |
 
-### Return Value
+### 返回值
 
-| Type | Description |
+| 类型 | 描述 |
 | :--- | :--- |
-|`unsigned`| A value indicating the initialized features is available. **0** is returned or error |
+| `unsigned` | 表示已初始化的功能的值。成功时返回非零值，错误时返回 **0** |
 
-### Description
+### 说明
 
-The function `mg_init_library()` should be called from an application program before using any other function.
-It can be called multiple times (`mg_init_library` and `mg_exit_library` are reference counting).
-However, the caller must make sure it is not called in parallel (it is not guaranteed to be thread safe).
+`mg_init_library()` 函数应在应用程序中使用任何其他 Civetweb 函数之前调用。它可以多次调用（`mg_init_library` 和 `mg_exit_library` 是引用计数的）。然而，调用者必须确保它不会被并行调用（不能保证它是线程安全的）。
 
-This function is new in version 1.9 (as dummy implementation) and effective only from version 1.10.
-For compatibility reasons, other functions (such as [`mg_start();`](mg_start.md)) will initialize the required features as well,
-but they will no longer do a de-initialization, leaving a memory leak when the library is unloaded.
+此函数从 1.9 版本开始引入（作为虚拟实现），从 1.10 版本开始生效。为了兼容性，其他函数（如 [`mg_start();`](mg_start.md)）也会初始化所需的特性，但它们不会再进行反初始化，这可能会在库卸载时导致内存泄漏。
 
-The following parameter values can be used:
+可以使用以下参数值：
 
-| Value | Compilation option | Feature Flags | Description |
+| 值 | 编译选项 | 功能标志 | 描述 |
 | :---: | :---: | :--- | :--- |
-| **1** | !NO_FILES | MG_FEATURES_FILES | *Able to serve files*.  If this feature is available, the webserver is able to serve files directly from a directory tree. |
-| **2** | !NO_SSL | MG_FEATURES_TLS | *Support for HTTPS*. If this feature is available, the webserver can use encryption in the client-server connection. SSLv2, SSLv3, TLSv1.0, TLSv1.1 and TLSv1.2 are supported depending on the SSL library CivetWeb has been compiled with, but which protocols are used effectively when the server is running is dependent on the options used when the server is started. |
-| **4** | !NO_CGI | MG_FEATURES_CGI | *Support for CGI*. If this feature is available, external CGI scripts can be called by the webserver. |
-| **8** | USE_IPV6 | MG_FEATURES_IPV6 | *Support IPv6*. The CivetWeb library is capable of communicating over both IPv4 and IPv6, but IPv6 support is only available if it has been enabled at compile time. |
-| **16** | USE_WEBSOCKET | MG_FEATURES_WEBSOCKET | *Support for web sockets*. WebSockets support is available in the CivetWeb library if the proper options has been used during cimpile time. |
-| **32** | USE_LUA | MG_FEATURES_LUA | *Support for Lua scripts and Lua server pages*. CivetWeb supports server side scripting through the Lua language, if that has been enabled at compile time. Lua is an efficient scripting language which is less resource heavy than for example PHP. |
-| **64** | USE_DUKTAPE | MG_FEATURES_SSJS | *Support for server side JavaScript*. Server side JavaScript can be used for dynamic page generation if the proper options have been set at compile time. Please note that client side JavaScript execution is always available if it has been enabled in the connecting browser. |
-| **128** | !NO_CACHING | MG_FEATURES_CACHE | *Support for caching*. The web server will support caching, if it has not been disabled while compiling the library. |
-| **256** | USE_SERVER_STATS | MG_FEATURES_STATS | *Support server statistics*. The web server will collect data for server statistics. |
-| **512** | USE_ZLIB | MG_FEATURES_COMPRESSION | *Support for on the fly compression*. The web server may use ZLIB for on the fly data compression. |
-| **1024** | USE_HTTP2 | MG_FEATURES_HTTP2 | *Support for HTTP/2 protocol*. The web server will accept HTTP/2 connections over HTTPS. |
-| **2048** | USE_X_DOM_SOCKET | MG_FEATURES_X_DOMAIN_SOCKET | *Support for UNIX domain sockets*. The web server will allow to bind to domain sockets, in addition to TCP sockets. |
-| **65535** | | MG_FEATURES_ALL | All feature flags. |
+| **1** | !NO_FILES | MG_FEATURES_FILES | *支持文件服务*。如果此功能可用，Web 服务器能够直接从目录树中提供文件。 |
+| **2** | !NO_SSL | MG_FEATURES_TLS | *支持 HTTPS*。如果此功能可用，Web 服务器可以在客户端与服务器之间的连接中使用加密。支持的协议取决于编译时使用的 SSL 库（SSLv2、SSLv3、TLSv1.0、TLSv1.1 和 TLSv1.2），但实际运行时使用的协议取决于启动服务器时的选项。 |
+| **4** | !NO_CGI | MG_FEATURES_CGI | *支持 CGI*。如果此功能可用，Web 服务器可以调用外部 CGI 脚本。 |
+| **8** | USE_IPV6 | MG_FEATURES_IPV6 | *支持 IPv6*。CivetWeb 库支持 IPv4 和 IPv6 通信，但 IPv6 支持必须在编译时启用。 |
+| **16** | USE_WEBSOCKET | MG_FEATURES_WEBSOCKET | *支持 WebSocket*。如果编译时使用了适当的选项，CivetWeb 库将支持 WebSocket。 |
+| **32** | USE_LUA | MG_FEATURES_LUA | *支持 Lua 脚本和 Lua 服务器页面*。如果在编译时启用，CivetWeb 支持通过 Lua 语言进行服务器端脚本编写。Lua 是一种高效的脚本语言，资源占用比 PHP 等语言更少。 |
+| **64** | USE_DUKTAPE | MG_FEATURES_SSJS | *支持服务器端 JavaScript*。如果编译时启用了适当的选项，可以使用服务器端 JavaScript 进行动态页面生成。请注意，客户端 JavaScript 的执行始终取决于连接的浏览器是否启用。 |
+| **128** | !NO_CACHING | MG_FEATURES_CACHE | *支持缓存*。如果在编译库时未禁用，Web 服务器将支持缓存。 |
+| **256** | USE_SERVER_STATS | MG_FEATURES_STATS | *支持服务器统计*。Web 服务器将收集服务器统计信息。 |
+| **512** | USE_ZLIB | MG_FEATURES_COMPRESSION | *支持实时压缩*。Web 服务器可能会使用 ZLIB 进行实时数据压缩。 |
+| **1024** | USE_HTTP2 | MG_FEATURES_HTTP2 | *支持 HTTP/2 协议*。Web 服务器将通过 HTTPS 接受 HTTP/2 连接。 |
+| **2048** | USE_X_DOM_SOCKET | MG_FEATURES_X_DOMAIN_SOCKET | *支持 UNIX 域套接字*。Web 服务器将允许绑定到域套接字，而不仅仅是 TCP 套接字。 |
+| **65535** | | MG_FEATURES_ALL | 所有功能标志 |
 
-The parameters can added using bitwise or. Values above 65535 are reserved, the behavior of the function is undefined if any unknown bit is set.
+参数可以通过位或操作组合使用。值大于 65535 是保留的，如果设置了任何未知位，函数的行为是未定义的。
 
-### See Also
+### 参考
 
-* [`mg_check_feature( feature );`](mg_check_feature.md)
-* [`mg_exit_library( feature );`](mg_exit_library.md)
+* [`mg_check_feature(feature);`](mg_check_feature.md)
+* [`mg_exit_library(feature);`](mg_exit_library.md)
