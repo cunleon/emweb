@@ -265,23 +265,6 @@ FileHandler(struct mg_connection *conn, void *cbdata)
 #endif /* NO_FILESYSTEMS */
 
 
-#define MD5_STATIC static
-#include "../src/md5.inl"
-
-/* Stringify binary data. Output buffer must be twice as big as input,
- * because each byte takes 2 bytes in string representation */
-static void
-bin2str(char *to, const unsigned char *p, size_t len)
-{
-	static const char *hex = "0123456789abcdef";
-
-	for (; len--; p++) {
-		*to++ = hex[p[0] >> 4];
-		*to++ = hex[p[0] & 0x0f];
-	}
-	*to = '\0';
-}
-
 
 int
 field_found(const char *key,
@@ -373,19 +356,7 @@ field_get(const char *key, const char *value, size_t valuelen, void *user_data)
 	}
 	mg_printf(conn, "valuelen = %lu\n", valuelen);
 
-	if (valuelen > 0) {
-		/* mg_write(conn, value, valuelen); */
 
-		md5_byte_t hash[16];
-		md5_state_t ctx;
-		char outputbuf[33];
-
-		md5_init(&ctx);
-		md5_append(&ctx, (const md5_byte_t *)value, valuelen);
-		md5_finish(&ctx, hash);
-		bin2str(outputbuf, hash, sizeof(hash));
-		mg_printf(conn, "value md5 hash = %s\n", outputbuf);
-	}
 
 #if 0 /* for debugging */
 	if (!strcmp(key, "File")) {
@@ -464,18 +435,6 @@ FileUploadForm(struct mg_connection *conn, void *cbdata)
 }
 
 
-struct tfile_checksum {
-	char name[128];
-	unsigned long long length;
-	md5_state_t chksum;
-};
-
-#define MAX_FILES (10)
-
-struct tfiles_checksums {
-	int index;
-	struct tfile_checksum file[MAX_FILES];
-};
 
 
 int
@@ -491,14 +450,6 @@ field_disp_read_on_the_fly(const char *key,
 	(void)path;
 	(void)pathlen;
 
-	if (context->index < MAX_FILES) {
-		context->index++;
-		strncpy(context->file[context->index - 1].name, filename, 128);
-		context->file[context->index - 1].name[127] = 0;
-		context->file[context->index - 1].length = 0;
-		md5_init(&(context->file[context->index - 1].chksum));
-		return MG_FORM_FIELD_STORAGE_GET;
-	}
 	return MG_FORM_FIELD_STORAGE_ABORT;
 }
 
@@ -512,57 +463,11 @@ field_get_checksum(const char *key,
 	struct tfiles_checksums *context = (struct tfiles_checksums *)user_data;
 	(void)key;
 
-	context->file[context->index - 1].length += valuelen;
-	md5_append(&(context->file[context->index - 1].chksum),
-	           (const md5_byte_t *)value,
-	           valuelen);
+
 
 	return 0;
 }
 
-
-int
-CheckSumHandler(struct mg_connection *conn, void *cbdata)
-{
-	/* Handler may access the request info using mg_get_request_info */
-	const struct mg_request_info *req_info = mg_get_request_info(conn);
-	int i, j, ret;
-	struct tfiles_checksums chksums;
-	md5_byte_t digest[16];
-	struct mg_form_data_handler fdh = {field_disp_read_on_the_fly,
-	                                   field_get_checksum,
-	                                   0,
-	                                   (void *)&chksums};
-
-	/* It would be possible to check the request info here before calling
-	 * mg_handle_form_request. */
-	(void)req_info;
-
-	memset(&chksums, 0, sizeof(chksums));
-
-	mg_printf(conn,
-	          "HTTP/1.1 200 OK\r\n"
-	          "Content-Type: text/plain\r\n"
-	          "Connection: close\r\n\r\n");
-
-	/* Call the form handler */
-	mg_printf(conn, "File checksums:");
-	ret = mg_handle_form_request(conn, &fdh);
-	for (i = 0; i < chksums.index; i++) {
-		md5_finish(&(chksums.file[i].chksum), digest);
-		/* Visual Studio 2010+ support llu */
-		mg_printf(conn,
-		          "\r\n%s %llu ",
-		          chksums.file[i].name,
-		          chksums.file[i].length);
-		for (j = 0; j < 16; j++) {
-			mg_printf(conn, "%02x", (unsigned int)digest[j]);
-		}
-	}
-	mg_printf(conn, "\r\n%i files\r\n", ret);
-
-	return 1;
-}
 
 
 int
@@ -1191,10 +1096,7 @@ main(int argc, char *argv[])
 	                       "/on_the_fly_form",
 	                       FileUploadForm,
 	                       (void *)"/on_the_fly_form.md5.callback");
-	mg_set_request_handler(ctx,
-	                       "/on_the_fly_form.md5.callback",
-	                       CheckSumHandler,
-	                       (void *)0);
+
 
 	/* Add handler for /cookie example */
 	mg_set_request_handler(ctx, "/cookie", CookieHandler, 0);
